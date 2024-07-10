@@ -1,37 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit System</h1>
-
 <form action="{{ url_for('systems.edit_system', id=system.id) }}" method="POST" class="system-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ system.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ system.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Details</legend>
         <div class="form-group">
-            <label for="rules">Rules:</label>
-            <textarea name="rules">{{ system.rules }}</textarea>
+            {{ form.rules.label }} {{ form.rules(class="form-control") }}
+            {% if form.rules.errors %}
+                <div class="text-danger">{{ form.rules.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="basis">Basis:</label>
-            <textarea name="basis">{{ system.basis }}</textarea>
+            {{ form.basis.label }} {{ form.basis(class="form-control") }}
+            {% if form.basis.errors %}
+                <div class="text-danger">{{ form.basis.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ system.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
-
 {% endblock %}

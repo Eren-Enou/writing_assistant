@@ -1,52 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Faction</h1>
-
 <form action="{{ url_for('factions.edit_faction', id=faction.id) }}" method="POST" class="faction-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ faction.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ faction.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ faction.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Alignment and Characteristics</legend>
         <div class="form-group">
-            <label for="is_neutral">Is Neutral:</label>
-            <input type="checkbox" name="is_neutral" {% if faction.is_neutral %}checked{% endif %}>
+            {{ form.is_neutral.label }} {{ form.is_neutral(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_good">Is Good:</label>
-            <input type="checkbox" name="is_good" {% if faction.is_good %}checked{% endif %}>
+            {{ form.is_good.label }} {{ form.is_good(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_evil">Is Evil:</label>
-            <input type="checkbox" name="is_evil" {% if faction.is_evil %}checked{% endif %}>
+            {{ form.is_evil.label }} {{ form.is_evil(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_chaotic">Is Chaotic:</label>
-            <input type="checkbox" name="is_chaotic" {% if faction.is_chaotic %}checked{% endif %}>
+            {{ form.is_chaotic.label }} {{ form.is_chaotic(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_lawful">Is Lawful:</label>
-            <input type="checkbox" name="is_lawful" {% if faction.is_lawful %}checked{% endif %}>
+            {{ form.is_lawful.label }} {{ form.is_lawful(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="alignment">Alignment:</label>
-            <input type="text" name="alignment" value="{{ faction.alignment }}">
+            {{ form.alignment.label }} {{ form.alignment(class="form-control") }}
+            {% if form.alignment.errors %}
+                <div class="text-danger">{{ form.alignment.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

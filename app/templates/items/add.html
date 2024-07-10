@@ -2,44 +2,58 @@
 {% block content %}
 <h1>Add Item</h1>
 <form action="{{ url_for('items.add_item') }}" method="post" class="item-form add-form">
+    {{ form.hidden_tag() }}
     <fieldset class="general-information">
         <legend>General Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="type">Type:</label>
-            <input type="text" id="type" name="type" required>
+            {{ form.type.label }} {{ form.type(class="form-control") }}
+            {% if form.type.errors %}
+                <div class="text-danger">{{ form.type.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <fieldset class="attributes">
         <legend>Attributes</legend>
         <div class="form-group">
-            <label for="weight">Weight:</label>
-            <input type="number" id="weight" name="weight" step="0.01">
+            {{ form.weight.label }} {{ form.weight(class="form-control") }}
+            {% if form.weight.errors %}
+                <div class="text-danger">{{ form.weight.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="value">Value:</label>
-            <input type="number" id="value" name="value">
+            {{ form.value.label }} {{ form.value(class="form-control") }}
+            {% if form.value.errors %}
+                <div class="text-danger">{{ form.value.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="enchantment">Enchantment:</label>
-            <input type="text" id="enchantment" name="enchantment">
+            {{ form.enchantment.label }} {{ form.enchantment(class="form-control") }}
+            {% if form.enchantment.errors %}
+                <div class="text-danger">{{ form.enchantment.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <fieldset class="owner">
         <legend>Owner</legend>
         <div class="form-group">
-            <label for="owner_id">Owner ID:</label>
-            <input type="number" id="owner_id" name="owner_id">
+            {{ form.owner_id.label }} {{ form.owner_id(class="form-control") }}
+            {% if form.owner_id.errors %}
+                <div class="text-danger">{{ form.owner_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <button type="submit" class="add-button">Add</button>
 </form>
 {% endblock %}
-

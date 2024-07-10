@@ -1,37 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Location</h1>
-
 <form action="{{ url_for('locations.edit_location', id=location.id) }}" method="POST" class="location-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ location.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ location.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ location.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Geographic Characteristics</legend>
         <div class="form-group">
-            <label for="climate">Climate:</label>
-            <input type="text" name="climate" value="{{ location.climate }}" required>
+            {{ form.climate.label }} {{ form.climate(class="form-control") }}
+            {% if form.climate.errors %}
+                <div class="text-danger">{{ form.climate.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="terrain">Terrain:</label>
-            <input type="text" name="terrain" value="{{ location.terrain }}" required>
+            {{ form.terrain.label }} {{ form.terrain(class="form-control") }}
+            {% if form.terrain.errors %}
+                <div class="text-danger">{{ form.terrain.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
-
 {% endblock %}

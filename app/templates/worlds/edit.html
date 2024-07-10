@@ -1,65 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit World</h1>
-
 <form action="{{ url_for('worlds.edit_world', id=world.id) }}" method="POST" class="world-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ world.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ world.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="history">History:</label>
-            <textarea name="history">{{ world.history }}</textarea>
+            {{ form.history.label }} {{ form.history(class="form-control") }}
+            {% if form.history.errors %}
+                <div class="text-danger">{{ form.history.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Characteristics</legend>
         <div class="form-group">
-            <label for="time_period">Time Period:</label>
-            <textarea name="time_period">{{ world.time_period }}</textarea>
+            {{ form.time_period.label }} {{ form.time_period(class="form-control") }}
+            {% if form.time_period.errors %}
+                <div class="text-danger">{{ form.time_period.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="setting">Setting:</label>
-            <textarea name="setting">{{ world.setting }}</textarea>
+            {{ form.setting.label }} {{ form.setting(class="form-control") }}
+            {% if form.setting.errors %}
+                <div class="text-danger">{{ form.setting.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="temperature">Temperature:</label>
-            <textarea name="temperature">{{ world.temperature }}</textarea>
+            {{ form.temperature.label }} {{ form.temperature(class="form-control") }}
+            {% if form.temperature.errors %}
+                <div class="text-danger">{{ form.temperature.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="humidity">Humidity:</label>
-            <textarea name="humidity">{{ world.humidity }}</textarea>
+            {{ form.humidity.label }} {{ form.humidity(class="form-control") }}
+            {% if form.humidity.errors %}
+                <div class="text-danger">{{ form.humidity.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Flora and Fauna</legend>
         <div class="form-group">
-            <label for="flora">Flora:</label>
-            <textarea name="flora">{{ world.flora }}</textarea>
+            {{ form.flora.label }} {{ form.flora(class="form-control") }}
+            {% if form.flora.errors %}
+                <div class="text-danger">{{ form.flora.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="fauna">Fauna:</label>
-            <textarea name="fauna">{{ world.fauna }}</textarea>
+            {{ form.fauna.label }} {{ form.fauna(class="form-control") }}
+            {% if form.fauna.errors %}
+                <div class="text-danger">{{ form.fauna.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Magic</legend>
         <div class="form-group">
-            <label for="magical_system">Magical System:</label>
-            <textarea name="magical_system">{{ world.magical_system }}</textarea>
+            {{ form.magical_system.label }} {{ form.magical_system(class="form-control") }}
+            {% if form.magical_system.errors %}
+                <div class="text-danger">{{ form.magical_system.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
-
 {% endblock %}

@@ -1,128 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Plot</h1>
-
-<form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST">
-    <fieldset>
-        <legend>General Information</legend>
-        <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="{{ plot.title }}" required>
-        </div>
-        <div class="form-group">
-            <label for="summary">Summary:</label>
-            <textarea name="summary" required>{{ plot.summary }}</textarea>
-        </div>
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description">{{ plot.description }}</textarea>
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Details</legend>
-        <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ plot.world_id }}" required>
-        </div>
-        <div class="form-group">
-            <label for="status">Status:</label>
-            <input type="text" name="status" value="{{ plot.status }}">
-        </div>
-        <div class="form-group">
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" value="{{ plot.genre }}">
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Metrics</legend>
-        <div class="form-group">
-            <label for="rating">Rating:</label>
-            <input type="text" name="rating" value="{{ plot.rating }}">
-        </div>
-        <div class="form-group">
-            <label for="word_count">Word Count:</label>
-            <input type="text" name="word_count" value="{{ plot.word_count }}">
-        </div>
-        <div class="form-group">
-            <label for="reading_time">Reading Time:</label>
-            <input type="text" name="reading_time" value="{{ plot.reading_time }}">
-        </div>
-    </fieldset>
-
-    <fieldset>
-        <legend>Publication</legend>
-        <div class="form-group">
-            <label for="published_date">Published Date:</label>
-            <input type="text" name="published_date" value="{{ plot.published_date }}">
-        </div>
-    </fieldset>
-
-    <input type="submit" value="Save">
-</form>
-{% extends "base.html" %}
-{% block content %}
-<h1>Edit Plot</h1>
-
 <form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST" class="plot-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="{{ plot.title }}" required>
+            {{ form.title.label }} {{ form.title(class="form-control") }}
+            {% if form.title.errors %}
+                <div class="text-danger">{{ form.title.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="summary">Summary:</label>
-            <textarea name="summary" required>{{ plot.summary }}</textarea>
+            {{ form.summary.label }} {{ form.summary(class="form-control") }}
+            {% if form.summary.errors %}
+                <div class="text-danger">{{ form.summary.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description">{{ plot.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Details</legend>
         <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ plot.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="status">Status:</label>
-            <input type="text" name="status" value="{{ plot.status }}">
+            {{ form.status.label }} {{ form.status(class="form-control") }}
+            {% if form.status.errors %}
+                <div class="text-danger">{{ form.status.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="genre">Genre:</label>
-            <input type="text" name="genre" value="{{ plot.genre }}">
+            {{ form.genre.label }} {{ form.genre(class="form-control") }}
+            {% if form.genre.errors %}
+                <div class="text-danger">{{ form.genre.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Metrics</legend>
         <div class="form-group">
-            <label for="rating">Rating:</label>
-            <input type="text" name="rating" value="{{ plot.rating }}">
+            {{ form.rating.label }} {{ form.rating(class="form-control") }}
+            {% if form.rating.errors %}
+                <div class="text-danger">{{ form.rating.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="word_count">Word Count:</label>
-            <input type="text" name="word_count" value="{{ plot.word_count }}">
+            {{ form.word_count.label }} {{ form.word_count(class="form-control") }}
+            {% if form.word_count.errors %}
+                <div class="text-danger">{{ form.word_count.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="reading_time">Reading Time:</label>
-            <input type="text" name="reading_time" value="{{ plot.reading_time }}">
+            {{ form.reading_time.label }} {{ form.reading_time(class="form-control") }}
+            {% if form.reading_time.errors %}
+                <div class="text-danger">{{ form.reading_time.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Publication</legend>
         <div class="form-group">
-            <label for="published_date">Published Date:</label>
-            <input type="text" name="published_date" value="{{ plot.published_date }}">
+            {{ form.published_date.label }} {{ form.published_date(class="form-control") }}
+            {% if form.published_date.errors %}
+                <div class="text-danger">{{ form.published_date.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
-
 {% endblock %}

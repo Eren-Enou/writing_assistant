@@ -1,59 +1,81 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Creature</h1>
-
 <form action="{{ url_for('creatures.edit_creature', id=creature.id) }}" method="POST" class="creature-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ creature.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ creature.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World ID:</label>
-            <input type="text" name="world_id" value="{{ creature.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <fieldset>
         <legend>Physical Characteristics</legend>
         <div class="form-group">
-            <label for="species">Species:</label>
-            <input type="text" name="species" value="{{ creature.species }}" required>
+            {{ form.species.label }} {{ form.species(class="form-control") }}
+            {% if form.species.errors %}
+                <div class="text-danger">{{ form.species.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="size">Size:</label>
-            <input type="text" name="size" value="{{ creature.size }}" required>
+            {{ form.size.label }} {{ form.size(class="form-control") }}
+            {% if form.size.errors %}
+                <div class="text-danger">{{ form.size.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="text" name="age" value="{{ creature.age }}" required>
+            {{ form.age.label }} {{ form.age(class="form-control") }}
+            {% if form.age.errors %}
+                <div class="text-danger">{{ form.age.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <fieldset>
         <legend>Role and Abilities</legend>
         <div class="form-group">
-            <label for="role">Role:</label>
-            <input type="text" name="role" value="{{ creature.role }}" required>
+            {{ form.role.label }} {{ form.role(class="form-control") }}
+            {% if form.role.errors %}
+                <div class="text-danger">{{ form.role.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="align">Alignment:</label>
-            <input type="text" name="align" value="{{ creature.align }}" required>
+            {{ form.align.label }} {{ form.align(class="form-control") }}
+            {% if form.align.errors %}
+                <div class="text-danger">{{ form.align.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="abilities">Abilities:</label>
-            <input type="text" name="abilities" value="{{ creature.abilities }}" required>
+            {{ form.abilities.label }} {{ form.abilities(class="form-control") }}
+            {% if form.abilities.errors %}
+                <div class="text-danger">{{ form.abilities.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="weapons">Weapons:</label>
-            <input type="text" name="weapons" value="{{ creature.weapons }}" required>
+            {{ form.weapons.label }} {{ form.weapons(class="form-control") }}
+            {% if form.weapons.errors %}
+                <div class="text-danger">{{ form.weapons.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="armor">Armor:</label>
-            <input type="text" name="armor" value="{{ creature.armor }}" required>
+            {{ form.armor.label }} {{ form.armor(class="form-control") }}
+            {% if form.armor.errors %}
+                <div class="text-danger">{{ form.armor.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <button type="submit" class="edit-button">Update</button>

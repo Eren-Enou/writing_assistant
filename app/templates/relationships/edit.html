@@ -1,60 +1,62 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Relationship</h1>
-
 <form action="{{ url_for('relationships.edit_relationship', id=relationship.id) }}" method="POST" class="relationship-form edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Characters Involved</legend>
         <div class="form-group">
-            <label for="character1_id">Character 1:</label>
-            <input type="text" name="character1_id" value="{{ relationship.character1_id }}" required>
+            {{ form.character1_id.label }} {{ form.character1_id(class="form-control") }}
+            {% if form.character1_id.errors %}
+                <div class="text-danger">{{ form.character1_id.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="character2_id">Character 2:</label>
-            <input type="text" name="character2_id" value="{{ relationship.character2_id }}" required>
+            {{ form.character2_id.label }} {{ form.character2_id(class="form-control") }}
+            {% if form.character2_id.errors %}
+                <div class="text-danger">{{ form.character2_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Relationship Details</legend>
         <div class="form-group">
-            <label for="relationship_type">Relationship Type:</label>
-            <input type="text" name="relationship_type" value="{{ relationship.relationship_type }}" required>
+            {{ form.relationship_type.label }} {{ form.relationship_type(class="form-control") }}
+            {% if form.relationship_type.errors %}
+                <div class="text-danger">{{ form.relationship_type.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description">{{ relationship.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="level">Level:</label>
-            <input type="text" name="level" value="{{ relationship.level }}">
+            {{ form.level.label }} {{ form.level(class="form-control") }}
+            {% if form.level.errors %}
+                <div class="text-danger">{{ form.level.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Characteristics</legend>
         <div class="form-group">
-            <label for="is_romantic">Is Romantic:</label>
-            <input type="checkbox" name="is_romantic" {% if relationship.is_romantic %}checked{% endif %}>
+            {{ form.is_romantic.label }} {{ form.is_romantic(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_supportive">Is Supportive:</label>
-            <input type="checkbox" name="is_supportive" {% if relationship.is_supportive %}checked{% endif %}>
+            {{ form.is_supportive.label }} {{ form.is_supportive(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_rival">Is Rival:</label>
-            <input type="checkbox" name="is_rival" {% if relationship.is_rival %}checked{% endif %}>
+            {{ form.is_rival.label }} {{ form.is_rival(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_ally">Is Ally:</label>
-            <input type="checkbox" name="is_ally" {% if relationship.is_ally %}checked{% endif %}>
+            {{ form.is_ally.label }} {{ form.is_ally(class="form-check-input") }}
         </div>
         <div class="form-group">
-            <label for="is_conflict">Is Conflict:</label>
-            <input type="checkbox" name="is_conflict" {% if relationship.is_conflict %}checked{% endif %}>
+            {{ form.is_conflict.label }} {{ form.is_conflict(class="form-check-input") }}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

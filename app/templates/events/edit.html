@@ -1,51 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Edit Event</h1>
-
 <form action="{{ url_for('events.edit_event', id=event.id) }}" method="POST" class="event-form edit-form">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
-    <input type="hidden" name="id" value="{{ event.id }}">
-
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Basic Details</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ event.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ event.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Timing and Location</legend>
         <div class="form-group">
-            <label for="date">Date:</label> 
-            <input type="date" name="date" value="{{ event.date }}" required>
+            {{ form.date.label }} {{ form.date(class="form-control") }}
+            {% if form.date.errors %}
+                <div class="text-danger">{{ form.date.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="location_id">Location:</label>
-            <input type="text" name="location_id" value="{{ event.location_id }}" required>
+            {{ form.location_id.label }} {{ form.location_id(class="form-control") }}
+            {% if form.location_id.errors %}
+                <div class="text-danger">{{ form.location_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <fieldset>
         <legend>Associations</legend>
         <div class="form-group">
-            <label for="faction_id">Faction:</label>
-            <input type="text" name="faction_id" value="{{ event.faction_id }}" required>
+            {{ form.faction_id.label }} {{ form.faction_id(class="form-control") }}
+            {% if form.faction_id.errors %}
+                <div class="text-danger">{{ form.faction_id.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="plot_id">Plot:</label>
-            <input type="text" name="plot_id" value="{{ event.plot_id }}" required>
+            {{ form.plot_id.label }} {{ form.plot_id(class="form-control") }}
+            {% if form.plot_id.errors %}
+                <div class="text-danger">{{ form.plot_id.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World:</label>
-            <input type="text" name="world_id" value="{{ event.world_id }}" required>
+            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
+            {% if form.world_id.errors %}
+                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-
     <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}
