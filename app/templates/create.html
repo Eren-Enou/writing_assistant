@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Create a New Entry</h1>
+    <p>Select the type of entry you would like to create:</p>
+    <ul>
+        <li><a href="{{ url_for('characters.add_character') }}">Create a Character</a></li>
+        <li><a href="{{ url_for('chapters.add_chapter') }}">Create a Chapter</a></li>
+        <li><a href="{{ url_for('creatures.add_creature') }}">Create a Creature</a></li>
+        <li><a href="{{ url_for('events.add_event') }}">Create an Event</a></li>
+        <li><a href="{{ url_for('factions.add_faction') }}">Create a Faction</a></li>
+        <li><a href="{{ url_for('items.add_item') }}">Create an Item</a></li>
+        <li><a href="{{ url_for('locations.add_location') }}">Create a Location</a></li>
+        <li><a href="{{ url_for('plots.add_plot') }}">Create a Plot</a></li>
+        <li><a href="{{ url_for('relationships.add_relationship') }}">Create a Relationship</a></li>
+        <li><a href="{{ url_for('systems.add_system') }}">Create a System</a></li>
+        <li><a href="{{ url_for('worlds.add_world') }}">Create a World</a></li>
+    </ul>
+{% endblock %}

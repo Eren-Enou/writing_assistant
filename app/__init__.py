@@ -10,7 +10,7 @@ def create_app():
     migrate.init_app(app, db)
 
     with app.app_context():
-        from .routes.main import main
+        from .routes.main import main_bp
 
         from .routes.chapters import chapters_bp
         from .routes.characters import characters_bp
@@ -24,8 +24,8 @@ def create_app():
         from .routes.systems import systems_bp
         from .routes.worlds import worlds_bp
 
-        app.register_blueprint(main)
-        
+        app.register_blueprint(main_bp)
+
         app.register_blueprint(characters_bp)
         app.register_blueprint(chapters_bp)
         app.register_blueprint(creatures_bp)

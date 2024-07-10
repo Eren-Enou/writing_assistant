@@ -4,9 +4,5 @@
     <h1>Welcome to the Fantasy Writing Assistant</h1>
     <p>This is a web application designed to assist you in writing a fantasy novel.</p>
     <p>You can use this tool to brainstorm ideas, generate character profiles, world-building information, and more.</p>
-    <p>To get started, please enter a prompt in the text box below.</p>
-    <form action="/generate" method="post">
-        <input type="text" name="prompt" placeholder="Enter your prompt here">
-        <input type="submit" value="Generate">
-    </form>
+    <p>Click <a href="{{ url_for('main.create') }}">here</a> to start creating your models.</p>
 {% endblock %}

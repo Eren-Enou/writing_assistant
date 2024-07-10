@@ -13,6 +13,6 @@ class Plot(db.Model):
     word_count = db.Column(db.Integer, nullable=True)
     reading_time = db.Column(db.Integer, nullable=True)
     published_date = db.Column(db.DateTime, nullable=True)
-    
+
     def __repr__(self):
         return f'<Plot {self.title}>'
