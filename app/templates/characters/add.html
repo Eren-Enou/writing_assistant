@@ -2,44 +2,91 @@
 {% block content %}
     <h1>Add Character</h1>
     <form action="{{ url_for('characters.add_character') }}" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required>
-        <label for="description">Description:</label>
-        <textarea name="description" required></textarea>
-        <label for="race">Race:</label>
-        <input type="text" name="race" required>
-        <label for="class_">Class:</label>
-        <input type="text" name="class_" required>
-        <label for="deity">Deity:</label>
-        <input type="text" name="deity">
-        <label for="age">Age:</label>
-        <input type="text" name="age" required>
-        <label for="alignment">Alignment:</label>
-        <input type="text" name="alignment" required>
-        <label for="strength">Strength:</label>
-        <input type="text" name="strength" required>
-        <label for="dexterity">Dexterity:</label>
-        <input type="text" name="dexterity" required>
-        <label for="constitution">Constitution:</label>
-        <input type="text" name="constitution" required>
-        <label for="intelligence">Intelligence:</label>
-        <input type="text" name="intelligence" required>
-        <label for="wisdom">Wisdom:</label>
-        <input type="text" name="wisdom" required>
-        <label for="charisma">Charisma:</label>
-        <input type="text" name="charisma" required>
-        <label for="experience_points">Experience Points:</label>
-        <input type="text" name="experience_points" required>
-        <label for="background">Background:</label>
-        <input type="text" name="background" required>
-        <label for="personality">Personality:</label>
-        <input type="text" name="personality" required>
-        <label for="ideal">Ideal:</label>
-        <input type="text" name="ideal" required>
-        <label for="bonds">Bonds:</label>
-        <input type="text" name="bonds" required>
-        <label for="flaws">Flaws:</label>
-        <input type="text" name="flaws" required>
-        <input type="submit" value="Add Character">
-    </form>
+        <fieldset class="personal-details">
+            <legend>Personal Details</legend>
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="race">Race:</label>
+                    <input type="text" name="race" required>
+                </div>
+                <div class="form-group">
+                    <label for="class_">Class:</label>
+                    <input type="text" name="class_" required>
+                </div>
+                <div class="form-group">
+                    <label for="deity">Deity:</label>
+                    <input type="text" name="deity">
+                </div>
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="text" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="alignment">Alignment:</label>
+                    <input type="text" name="alignment" required>
+                </div>
+            </fieldset>
+            <fieldset class="attributes">
+                <legend>Attributes</legend>
+                <div class="form-group">
+                    <label for="strength">Strength:</label>
+                    <input type="text" name="strength" required>
+                </div>
+                <div class="form-group">
+                    <label for="dexterity">Dexterity:</label>
+                    <input type="text" name="dexterity" required>
+                </div>
+                <div class="form-group">
+                    <label for="constitution">Constitution:</label>
+                    <input type="text" name="constitution" required>
+                </div>
+                <div class="form-group">
+                    <label for="intelligence">Intelligence:</label>
+                    <input type="text" name="intelligence" required>
+                </div>
+                <div class="form-group">
+                    <label for="wisdom">Wisdom:</label>
+                    <input type="text" name="wisdom" required>
+                </div>
+                <div class="form-group">
+                    <label for="charisma">Charisma:</label>
+                    <input type="text" name="charisma" required>
+                </div>
+            </fieldset>
+            <fieldset class="Additional Information">
+                <legend>Additional Information</legend>
+                <div class="form-group">
+                    <label for="experience_points">Experience Points:</label>
+                    <input type="text" name="experience_points" required>
+                </div>
+                <div class="form-group">
+                    <label for="background">Background:</label>
+                    <input type="text" name="background" required>
+                </div>
+                <div class="form-group">
+                    <label for="personality">Personality:</label>
+                    <input type="text" name="personality" required>
+                </div>
+                <div class="form-group">
+                    <label for="ideal">Ideal:</label>
+                    <input type="text" name="ideal" required>
+                </div>
+                <div class="form-group">
+                    <label for="bonds">Bonds:</label>
+                    <input type="text" name="bonds" required>
+                </div>
+                <div class="form-group">
+                    <label for="flaws">Flaws:</label>
+                    <input type="text" name="flaws" required>
+                </div>
+            </fieldset>
+            <button type="submit">Add Character</button>
+            </form>
 {% endblock %}

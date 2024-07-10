@@ -9,3 +9,7 @@ def home():
 @main_bp.route('/create')
 def create():
     return render_template('create.html')
+
+@main_bp.route('/list')
+def list_models():
+    return render_template('list.html')

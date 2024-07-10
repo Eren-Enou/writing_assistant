@@ -2,28 +2,60 @@
 {% block content %}
 <h1>Add World</h1>
 
-<form action="{{ url_for('worlds.add_world') }}" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" required>
-    <label for="description">Description:</label>
-    <textarea name="description" required></textarea>
-    <label for="history">History:</label>
-    <textarea name="history"></textarea>
-    <label for="time_period">Time Period:</label>
-    <textarea name="time_period"></textarea>
-    <label for="setting">Setting:</label>
-    <textarea name="setting"></textarea>
-    <label for="temperature">Temperature:</label>
-    <textarea name="temperature"></textarea>
-    <label for="humidity">Humidity:</label>
-    <textarea name="humidity"></textarea>
-    <label for="flora">Flora:</label>
-    <textarea name="flora"></textarea>
-    <label for="fauna">Fauna:</label>
-    <textarea name="fauna"></textarea>
-    <label for="magical_system">Magical System:</label>
-    <textarea name="magical_system"></textarea>
-    <input type="submit" value="Add World">
+<form action="{{ url_for('worlds.add_world') }}" method="post" class="world-form">
+    <fieldset class="basic-information">
+        <legend>Basic Information</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="history">History:</label>
+            <textarea id="history" name="history"></textarea>
+        </div>
+    </fieldset>
+    <fieldset class="characteristics">
+        <legend>Characteristics</legend>
+        <div class="form-group">
+            <label for="time_period">Time Period:</label>
+            <input type="text" id="time_period" name="time_period">
+        </div>
+        <div class="form-group">
+            <label for="setting">Setting:</label>
+            <input type="text" id="setting" name="setting">
+        </div>
+        <div class="form-group">
+            <label for="temperature">Temperature:</label>
+            <input type="number" id="temperature" name="temperature" step="0.1">
+        </div>
+        <div class="form-group">
+            <label for="humidity">Humidity:</label>
+            <input type="number" id="humidity" name="humidity" step="0.1">
+        </div>
+    </fieldset>
+    <fieldset class="flora-and-fauna">
+        <legend>Flora and Fauna</legend>
+        <div class="form-group">
+            <label for="flora">Flora:</label>
+            <textarea id="flora" name="flora"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="fauna">Fauna:</label>
+            <textarea id="fauna" name="fauna"></textarea>
+        </div>
+    </fieldset>
+    <fieldset class="magic">
+        <legend>Magic</legend>
+        <div class="form-group">
+            <label for="magical_system">Magical System:</label>
+            <input type="text" id="magical_system" name="magical_system">
+        </div>
+    </fieldset>
+    <button type="submit">Add</button>
 </form>
 
 {% endblock %}

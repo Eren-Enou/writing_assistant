@@ -2,25 +2,49 @@
 {% block content %}
 
 <h1>Add Faction</h1>
-<form action="{{ url_for('factions.add_faction') }}" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" required>
-    <label for="description">Description:</label>
-    <textarea name="description" required></textarea>
-    <label for="world_id">World:</label>
-    <input type="text" name="world_id" required>
-    <label for="is_neutral">Is Neutral:</label>
-    <input type="checkbox" name="is_neutral">
-    <label for="is_good">Is Good:</label>
-    <input type="checkbox" name="is_good">
-    <label for="is_evil">Is Evil:</label>
-    <input type="checkbox" name="is_evil">
-    <label for="is_chaotic">Is Chaotic:</label>
-    <input type="checkbox" name="is_chaotic">
-    <label for="is_lawful">Is Lawful:</label>
-    <input type="checkbox" name="is_lawful">
-    <label for="alignment">Alignment:</label>
-    <input type="text" name="alignment">
-    <input type="submit" value="Add Faction">
+<form action="{{ url_for('factions.add_faction') }}" method="post" class="faction-form">
+    <fieldset class="basic-information">
+        <legend>Basic Information</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="world_id">World ID:</label>
+            <input type="number" id="world_id" name="world_id" required>
+        </div>
+    </fieldset>
+    <fieldset class="alignment-and-characteristics">
+        <legend>Alignment and Characteristics</legend>
+        <div class="form-group">
+            <label for="is_neutral">Is Neutral:</label>
+            <input type="checkbox" id="is_neutral" name="is_neutral">
+        </div>
+        <div class="form-group">
+            <label for="is_good">Is Good:</label>
+            <input type="checkbox" id="is_good" name="is_good">
+        </div>
+        <div class="form-group">
+            <label for="is_evil">Is Evil:</label>
+            <input type="checkbox" id="is_evil" name="is_evil">
+        </div>
+        <div class="form-group">
+            <label for="is_chaotic">Is Chaotic:</label>
+            <input type="checkbox" id="is_chaotic" name="is_chaotic">
+        </div>
+        <div class="form-group">
+            <label for="is_lawful">Is Lawful:</label>
+            <input type="checkbox" id="is_lawful" name="is_lawful">
+        </div>
+        <div class="form-group">
+            <label for="alignment">Alignment:</label>
+            <input type="text" id="alignment" name="alignment">
+        </div>
+    </fieldset>
+    <button type="submit">Add</button>
 </form>
 {% endblock %}

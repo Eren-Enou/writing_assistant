@@ -2,18 +2,34 @@
 {% block content %}
 <h1>Add System</h1>
 
-<form action="{{ url_for('systems.add_system') }}" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" required>
-    <label for="description">Description:</label>
-    <textarea name="description" required></textarea>
-    <label for="rules">Rules:</label>
-    <textarea name="rules"></textarea>
-    <label for="basis">Basis:</label>
-    <textarea name="basis"></textarea>
-    <label for="world_id">World:</label>
-    <input type="text" name="world_id" required>
-    <input type="submit" value="Add System">
+<form action="{{ url_for('systems.add_system') }}" method="post" class="system-form">
+    <fieldset class="general-information">
+        <legend>General Information</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+    </fieldset>
+    <fieldset class="details">
+        <legend>Details</legend>
+        <div class="form-group">
+            <label for="rules">Rules:</label>
+            <textarea id="rules" name="rules"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="basis">Basis:</label>
+            <textarea id="basis" name="basis"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="world_id">World ID:</label>
+            <input type="number" id="world_id" name="world_id" required>
+        </div>
+    </fieldset>
+    <button type="submit">Add</button>
 </form>
 
 {% endblock %}

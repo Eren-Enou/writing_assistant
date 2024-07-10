@@ -1,29 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Add Creature</h1>
-    <form action="{{ url_for('creatures.add_creature') }}" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required>
-        <label for="description">Description:</label>
-        <textarea name="description" required></textarea>
-        <label for="world_id">World:</label>
-        <input type="text" name="world_id" required>
-        <label for="species">Species:</label>
-        <input type="text" name="species" required>
-        <label for="size">Size:</label>
-        <input type="text" name="size" required>
-        <label for="age">Age:</label>
-        <input type="text" name="age" required>
-        <label for="role">Role:</label>
-        <input type="text" name="role" required>
-        <label for="align">Alignment:</label>
-        <input type="text" name="align" required>
-        <label for="abilities">Abilities:</label>
-        <input type="text" name="abilities" required>
-        <label for="weapons">Weapons:</label>
-        <input type="text" name="weapons" required>
-        <label for="armor">Armor:</label>
-        <input type="text" name="armor" required>
-        <input type="submit" value="Add Creature">
+    <form action="{{ url_for('creatures.add_creature') }}" method="post" class="creature-form">
+        <fieldset class="general-information">
+            <legend>General Information</legend>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="world_id">World ID:</label>
+                <input type="number" id="world_id" name="world_id" required>
+            </div>
+        </fieldset>
+        <fieldset class="physical-characteristics">
+            <legend>Physical Characteristics</legend>
+            <div class="form-group">
+                <label for="species">Species:</label>
+                <input type="text" id="species" name="species" required>
+            </div>
+            <div class="form-group">
+                <label for="size">Size:</label>
+                <input type="text" id="size" name="size" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+            </div>
+        </fieldset>
+        <fieldset class="role-and-abilities">
+            <legend>Role and Abilities</legend>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <input type="text" id="role" name="role" required>
+            </div>
+            <div class="form-group">
+                <label for="align">Alignment:</label>
+                <input type="text" id="align" name="align" required>
+            </div>
+            <div class="form-group">
+                <label for="abilities">Abilities:</label>
+                <textarea id="abilities" name="abilities"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="weapons">Weapons:</label>
+                <textarea id="weapons" name="weapons"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="armor">Armor:</label>
+                <textarea id="armor" name="armor"></textarea>
+            </div>
+        </fieldset>
+        <button type="submit">Add</button>
     </form>
 {% endblock %}

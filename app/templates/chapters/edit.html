@@ -3,24 +3,48 @@
 <h1>Edit Chapter</h1>
 
 <form action="{{ url_for('chapters.edit_chapter', chapter_id=chapter.id) }}" method="POST">
-    <label for="title">Title:</label>
-    <input type="text" name="title" value="{{ chapter.title }}" required>
-    <label for="content">Content:</label>
-    <textarea name="content" required>{{ chapter.content }}</textarea>
-    <label for="plot_id">Plot ID:</label>
-    <input type="text" name="plot_id" value="{{ chapter.plot_id }}" required>
-    <label for="world_id">World ID:</label>
-    <input type="text" name="world_id" value="{{ chapter.world_id }}" required>
-    <label for="location_id">Location ID:</label>
-    <input type="text" name="location_id" value="{{ chapter.location_id }}">
-    <label for="creature_id">Creature ID:</label>
-    <input type="text" name="creature_id" value="{{ chapter.creature_id }}">
-    <label for="event_id">Event ID:</label>
-    <input type="text" name="event_id" value="{{ chapter.event_id }}">
-    <label for="magic_system_id">Magic System ID:</label>
-    <input type="text" name="magic_system_id" value="{{ chapter.magic_system_id }}">
-    <label for="faction_id">Faction ID:</label>
-    <input type="text" name="faction_id" value="{{ chapter.faction_id }}">
+    <fieldset>
+        <legend>Basic Information</legend>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" name="title" value="{{ chapter.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea name="content" required>{{ chapter.content }}</textarea>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            <label for="plot_id">Plot ID:</label>
+            <input type="text" name="plot_id" value="{{ chapter.plot_id }}" required>
+        </div>
+        <div class="form-group">
+            <label for="world_id">World ID:</label>
+            <input type="text" name="world_id" value="{{ chapter.world_id }}" required>
+        </div>
+        <div class="form-group">
+            <label for="location_id">Location ID:</label>
+            <input type="text" name="location_id" value="{{ chapter.location_id }}">
+        </div>
+        <div class="form-group">
+            <label for="creature_id">Creature ID:</label>
+            <input type="text" name="creature_id" value="{{ chapter.creature_id }}">
+        </div>
+        <div class="form-group">
+            <label for="event_id">Event ID:</label>
+            <input type="text" name="event_id" value="{{ chapter.event_id }}">
+        </div>
+        <div class="form-group">
+            <label for="magic_system_id">Magic System ID:</label>
+            <input type="text" name="magic_system_id" value="{{ chapter.magic_system_id }}">
+        </div>
+        <div class="form-group">
+            <label for="faction_id">Faction ID:</label>
+            <input type="text" name="faction_id" value="{{ chapter.faction_id }}">
+        </div>
+    </fieldset>
     <input type="submit" value="Update Chapter">
 </form>
 

@@ -9,6 +9,10 @@
 <body>
     <header>
         <h2>Fantasy Novel Assistant</h2>
+        <nav>
+            <p>Click <a href="{{ url_for('main.create') }}">here</a> to start creating your models.</p>
+            <p>Click <a href="{{ url_for('main.list_models') }}">here</a> to view your models.</p>
+        </nav>
     </header>
     <main>
         {% block content %}{% endblock %}

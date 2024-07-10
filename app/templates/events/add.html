@@ -1,21 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Add Event</h1>
-    <form action="{{ url_for('events.add_event') }}" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" required>
-        <label for="description">Description:</label>
-        <textarea name="description" required></textarea>
-        <label for="date">Date:</label>
-        <input type="date" name="date" required>
-        <label for="location_id">Location:</label>
-        <input type="text" name="location_id" required>
-        <label for="faction_id">Faction:</label>
-        <input type="text" name="faction_id" required>
-        <label for="plot_id">Plot:</label>
-        <input type="text" name="plot_id" required>
-        <label for="world_id">World:</label>
-        <input type="text" name="world_id" required>
-        <input type="submit" value="Add Event">
+    <form action="{{ url_for('events.add_event') }}" method="post" class="event-form">
+        <fieldset class="basic-details">
+            <legend>Basic Details</legend>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+        </fieldset>
+        <fieldset class="timing-and-location">
+            <legend>Timing and Location</legend>
+            <div class="form-group">
+                <label for="date">Date:</label>
+                <input type="datetime-local" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="location_id">Location ID:</label>
+                <input type="number" id="location_id" name="location_id">
+            </div>
+        </fieldset>
+        <fieldset class="associations">
+            <legend>Associations</legend>
+            <div class="form-group">
+                <label for="faction_id">Faction ID:</label>
+                <input type="number" id="faction_id" name="faction_id">
+            </div>
+            <div class="form-group">
+                <label for="plot_id">Plot ID:</label>
+                <input type="number" id="plot_id" name="plot_id">
+            </div>
+            <div class="form-group">
+                <label for="world_id">World ID:</label>
+                <input type="number" id="world_id" name="world_id" required>
+            </div>
+        </fieldset>
+        <button type="submit">Add</button>
     </form>
 {% endblock %}

@@ -3,26 +3,125 @@
 <h1>Edit Plot</h1>
 
 <form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST">
-    <label for="title">Title:</label>
-    <input type="text" name="title" value="{{ plot.title }}" required>
-    <label for="summary">Summary:</label>
-    <textarea name="summary" required>{{ plot.summary }}</textarea>
-    <label for="description">Description:</label>
-    <textarea name="description">{{ plot.description }}</textarea>
-    <label for="world_id">World:</label>
-    <input type="text" name="world_id" value="{{ plot.world_id }}" required>
-    <label for="status">Status:</label>
-    <input type="text" name="status" value="{{ plot.status }}">
-    <label for="genre">Genre:</label>
-    <input type="text" name="genre" value="{{ plot.genre }}">
-    <label for="rating">Rating:</label>
-    <input type="text" name="rating" value="{{ plot.rating }}">
-    <label for="word_count">Word Count:</label>
-    <input type="text" name="word_count" value="{{ plot.word_count }}">
-    <label for="reading_time">Reading Time:</label>
-    <input type="text" name="reading_time" value="{{ plot.reading_time }}">
-    <label for="published_date">Published Date:</label>
-    <input type="text" name="published_date" value="{{ plot.published_date }}">
+    <fieldset>
+        <legend>General Information</legend>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" name="title" value="{{ plot.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea name="summary" required>{{ plot.summary }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description">{{ plot.description }}</textarea>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Details</legend>
+        <div class="form-group">
+            <label for="world_id">World:</label>
+            <input type="text" name="world_id" value="{{ plot.world_id }}" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" name="status" value="{{ plot.status }}">
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" name="genre" value="{{ plot.genre }}">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Metrics</legend>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="text" name="rating" value="{{ plot.rating }}">
+        </div>
+        <div class="form-group">
+            <label for="word_count">Word Count:</label>
+            <input type="text" name="word_count" value="{{ plot.word_count }}">
+        </div>
+        <div class="form-group">
+            <label for="reading_time">Reading Time:</label>
+            <input type="text" name="reading_time" value="{{ plot.reading_time }}">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Publication</legend>
+        <div class="form-group">
+            <label for="published_date">Published Date:</label>
+            <input type="text" name="published_date" value="{{ plot.published_date }}">
+        </div>
+    </fieldset>
+
+    <input type="submit" value="Save">
+</form>
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Plot</h1>
+
+<form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST">
+    <fieldset>
+        <legend>General Information</legend>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" name="title" value="{{ plot.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="summary">Summary:</label>
+            <textarea name="summary" required>{{ plot.summary }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description">{{ plot.description }}</textarea>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Details</legend>
+        <div class="form-group">
+            <label for="world_id">World:</label>
+            <input type="text" name="world_id" value="{{ plot.world_id }}" required>
+        </div>
+        <div class="form-group">
+            <label for="status">Status:</label>
+            <input type="text" name="status" value="{{ plot.status }}">
+        </div>
+        <div class="form-group">
+            <label for="genre">Genre:</label>
+            <input type="text" name="genre" value="{{ plot.genre }}">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Metrics</legend>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input type="text" name="rating" value="{{ plot.rating }}">
+        </div>
+        <div class="form-group">
+            <label for="word_count">Word Count:</label>
+            <input type="text" name="word_count" value="{{ plot.word_count }}">
+        </div>
+        <div class="form-group">
+            <label for="reading_time">Reading Time:</label>
+            <input type="text" name="reading_time" value="{{ plot.reading_time }}">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Publication</legend>
+        <div class="form-group">
+            <label for="published_date">Published Date:</label>
+            <input type="text" name="published_date" value="{{ plot.published_date }}">
+        </div>
+    </fieldset>
+
     <input type="submit" value="Save">
 </form>
 

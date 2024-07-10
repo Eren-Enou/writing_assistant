@@ -2,28 +2,56 @@
 {% block content %}
 <h1>Add Relationship</h1>
 
-<form action="{{ url_for('relationships.add_relationship') }}" method="POST">
-    <label for="character1_id">Character 1:</label>
-    <input type="text" name="character1_id" required>
-    <label for="character2_id">Character 2:</label>
-    <input type="text" name="character2_id" required>
-    <label for="relationship_type">Relationship Type:</label>
-    <input type="text" name="relationship_type" required>
-    <label for="description">Description:</label>
-    <textarea name="description"></textarea>
-    <label for="level">Level:</label>
-    <input type="text" name="level">
-    <label for="is_romantic">Is Romantic:</label>
-    <input type="checkbox" name="is_romantic">
-    <label for="is_supportive">Is Supportive:</label>
-    <input type="checkbox" name="is_supportive">
-    <label for="is_rival">Is Rival:</label>
-    <input type="checkbox" name="is_rival">
-    <label for="is_ally">Is Ally:</label>
-    <input type="checkbox" name="is_ally">
-    <label for="is_conflict">Is Conflict:</label>
-    <input type="checkbox" name="is_conflict">
-    <input type="submit" value="Add Relationship">
+<form action="{{ url_for('relationships.add_relationship') }}" method="post" class="relationship-form">
+    <fieldset class="characters-involved">
+        <legend>Characters Involved</legend>
+        <div class="form-group">
+            <label for="character1_id">Character 1 ID:</label>
+            <input type="number" id="character1_id" name="character1_id" required>
+        </div>
+        <div class="form-group">
+            <label for="character2_id">Character 2 ID:</label>
+            <input type="number" id="character2_id" name="character2_id" required>
+        </div>
+    </fieldset>
+    <fieldset class="details">
+        <div class="form-group">
+            <label for="relationship_type">Relationship Type:</label>
+            <input type="text" id="relationship_type" name="relationship_type" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
+        </div>
+    </fieldset>
+    <fieldset class="Characteristics">
+        <legend>Characteristics</legend>
+        <div class="form-group">
+            <label for="level">Level:</label>
+            <input type="number" id="level" name="level">
+        </div>
+        <div class="form-group">
+            <label for="is_romantic">Is Romantic:</label>
+            <input type="checkbox" id="is_romantic" name="is_romantic">
+        </div>
+        <div class="form-group">
+            <label for="is_supportive">Is Supportive:</label>
+            <input type="checkbox" id="is_supportive" name="is_supportive">
+        </div>
+        <div class="form-group">
+            <label for="is_rival">Is Rival:</label>
+            <input type="checkbox" id="is_rival" name="is_rival">
+        </div>
+        <div class="form-group">
+            <label for="is_ally">Is Ally:</label>
+            <input type="checkbox" id="is_ally" name="is_ally">
+        </div>
+        <div class="form-group">
+            <label for="is_conflict">Is Conflict:</label>
+            <input type="checkbox" id="is_conflict" name="is_conflict">
+        </div>
+    </fieldset>
+    <button type="submit">Add</button>
 </form>
 
 {% endblock %}

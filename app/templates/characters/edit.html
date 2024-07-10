@@ -1,45 +1,93 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Edit Character</h1>
-    <form action="{{ url_for('characters.edit_character', id=character.id) }}" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="{{ character.name }}" required>
-        <label for="description">Description:</label>
-        <textarea name="description" required>{{ character.description }}</textarea>
-        <label for="race">Race:</label>
-        <input type="text" name="race" value="{{ character.race }}" required>
-        <label for="class_">Class:</label>
-        <input type="text" name="class_" value="{{ character.class_ }}" required>
-        <label for="deity">Deity:</label>
-        <input type="text" name="deity" value="{{ character.deity }}">
-        <label for="age">Age:</label>
-        <input type="text" name="age" value="{{ character.age }}" required>
-        <label for="alignment">Alignment:</label>
-        <input type="text" name="alignment" value="{{ character.alignment }}" required>
-        <label for="strength">Strength:</label>
-        <input type="text" name="strength" value="{{ character.strength }}" required>
-        <label for="dexterity">Dexterity:</label>
-        <input type="text" name="dexterity" value="{{ character.dexterity }}" required>
-        <label for="constitution">Constitution:</label>
-        <input type="text" name="constitution" value="{{ character.constitution }}" required>
-        <label for="intelligence">Intelligence:</label>
-        <input type="text" name="intelligence" value="{{ character.intelligence }}" required>
-        <label for="wisdom">Wisdom:</label>
-        <input type="text" name="wisdom" value="{{ character.wisdom }}" required>
-        <label for="charisma">Charisma:</label>
-        <input type="text" name="charisma" value="{{ character.charisma }}" required>
-        <label for="experience_points">Experience Points:</label>
-        <input type="text" name="experience_points" value="{{ character.experience_points }}" required>
-        <label for="background">Background:</label>
-        <input type="text" name="background" value="{{ character.background }}" required>
-        <label for="personality">Personality:</label>
-        <input type="text" name="personality" value="{{ character.personality }}" required>
-        <label for="ideal">Ideal:</label>
-        <input type="text" name="ideal" value="{{ character.ideal }}" required>
-        <label for="bonds">Bonds:</label>
-        <input type="text" name="bonds" value="{{ character.bonds }}" required>
-        <label for="flaws">Flaws:</label>
-        <input type="text" name="flaws" value="{{ character.flaws }}" required>
-        <input type="submit" value="Save Changes">
-    </form>
+<h1>Edit Character</h1>
+
+<form action="{{ url_for('characters.edit_character', id=character.id) }}" method="POST">
+    <fieldset>
+        <legend>Personal Details</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="{{ character.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" required>{{ character.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="race">Race:</label>
+            <input type="text" name="race" value="{{ character.race }}" required>
+        </div>
+        <div class="form-group">
+            <label for="class_">Class:</label>
+            <input type="text" name="class_" value="{{ character.class_ }}" required>
+        </div>
+        <div class="form-group">
+            <label for="deity">Deity:</label>
+            <input type="text" name="deity" value="{{ character.deity }}">
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="text" name="age" value="{{ character.age }}" required>
+        </div>
+        <div class="form-group">
+            <label for="alignment">Alignment:</label>
+            <input type="text" name="alignment" value="{{ character.alignment }}" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Attributes</legend>
+        <div class="form-group">
+            <label for="strength">Strength:</label>
+            <input type="text" name="strength" value="{{ character.strength }}" required>
+        </div>
+        <div class="form-group">
+            <label for="dexterity">Dexterity:</label>
+            <input type="text" name="dexterity" value="{{ character.dexterity }}" required>
+        </div>
+        <div class="form-group">
+            <label for="constitution">Constitution:</label>
+            <input type="text" name="constitution" value="{{ character.constitution }}" required>
+        </div>
+        <div class="form-group">
+            <label for="intelligence">Intelligence:</label>
+            <input type="text" name="intelligence" value="{{ character.intelligence }}" required>
+        </div>
+        <div class="form-group">
+            <label for="wisdom">Wisdom:</label>
+            <input type="text" name="wisdom" value="{{ character.wisdom }}" required>
+        </div>
+        <div class="form-group">
+            <label for="charisma">Charisma:</label>
+            <input type="text" name="charisma" value="{{ character.charisma }}" required>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Background</legend>
+        <div class="form-group">
+            <label for="experience_points">Experience Points:</label>
+            <input type="text" name="experience_points" value="{{ character.experience_points }}" required>
+        </div>
+        <div class="form-group">
+            <label for="background">Background:</label>
+            <input type="text" name="background" value="{{ character.background }}" required>
+        </div>
+        <div class="form-group">
+            <label for="personality">Personality:</label>
+            <input type="text" name="personality" value="{{ character.personality }}" required>
+        </div>
+        <div class="form-group">
+            <label for="ideal">Ideal:</label>
+            <input type="text" name="ideal" value="{{ character.ideal }}" required>
+        </div>
+        <div class="form-group">
+            <label for="bonds">Bonds:</label>
+            <input type="text" name="bonds" value="{{ character.bonds }}" required>
+        </div>
+        <div class="form-group">
+            <label for="flaws">Flaws:</label>
+            <input type="text" name="flaws" value="{{ character.flaws }}" required>
+        </div>
+    </fieldset>
+    <input type="submit" value="Save Changes">
+</form>
 {% endblock %}

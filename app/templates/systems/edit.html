@@ -3,16 +3,34 @@
 <h1>Edit System</h1>
 
 <form action="{{ url_for('systems.edit_system', id=system.id) }}" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" value="{{ system.name }}" required>
-    <label for="description">Description:</label>
-    <textarea name="description" required>{{ system.description }}</textarea>
-    <label for="rules">Rules:</label>
-    <textarea name="rules">{{ system.rules }}</textarea>
-    <label for="basis">Basis:</label>
-    <textarea name="basis">{{ system.basis }}</textarea>
-    <label for="world_id">World:</label>
-    <input type="text" name="world_id" value="{{ system.world_id }}" required>
+    <fieldset>
+        <legend>General Information</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" value="{{ system.name }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description" required>{{ system.description }}</textarea>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Details</legend>
+        <div class="form-group">
+            <label for="rules">Rules:</label>
+            <textarea name="rules">{{ system.rules }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="basis">Basis:</label>
+            <textarea name="basis">{{ system.basis }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="world_id">World:</label>
+            <input type="text" name="world_id" value="{{ system.world_id }}" required>
+        </div>
+    </fieldset>
+
     <input type="submit" value="Save">
 </form>
 

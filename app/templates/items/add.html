@@ -1,22 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add Item</h1>
-<form action="{{ url_for('items.add_item') }}" method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" required>
-    <label for="description">Description:</label>
-    <textarea name="description" required></textarea>
-    <label for="type">Type:</label>
-    <input type="text" name="type" required>
-    <label for="weight">Weight:</label>
-    <input type="text" name="weight">
-    <label for="value">Value:</label>
-    <input type="text" name="value">
-    <label for="enchantment">Enchantment:</label>
-    <input type="text" name="enchantment">
-    <label for="owner_id">Owner:</label>
-    <input type="text" name="owner_id">
-    <input type="submit" value="Add Item">
+<form action="{{ url_for('items.add_item') }}" method="post" class="item-form">
+    <fieldset class="general-information">
+        <legend>General Information</legend>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required>
+        </div>
+    </fieldset>
+    <fieldset class="attributes">
+        <legend>Attributes</legend>
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="value">Value:</label>
+            <input type="number" id="value" name="value">
+        </div>
+        <div class="form-group">
+            <label for="enchantment">Enchantment:</label>
+            <input type="text" id="enchantment" name="enchantment">
+        </div>
+    </fieldset>
+    <fieldset class="owner">
+        <legend>Owner</legend>
+        <div class="form-group">
+            <label for="owner_id">Owner ID:</label>
+            <input type="number" id="owner_id" name="owner_id">
+        </div>
+    </fieldset>
+    <button type="submit">Add</button>
 </form>
 {% endblock %}
 
