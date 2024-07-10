@@ -1,2 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
+<h1>Edit World</h1>
+
+<form action="{{ url_for('worlds.edit_world', id=world.id) }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ world.name }}" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required>{{ world.description }}</textarea>
+    <label for="history">History:</label>
+    <textarea name="history">{{ world.history }}</textarea>
+    <label for="time_period">Time Period:</label>
+    <textarea name="time_period">{{ world.time_period }}</textarea>
+    <label for="setting">Setting:</label>
+    <textarea name="setting">{{ world.setting }}</textarea>
+    <label for="temperature">Temperature:</label>
+    <textarea name="temperature">{{ world.temperature }}</textarea>
+    <label for="humidity">Humidity:</label>
+    <textarea name="humidity">{{ world.humidity }}</textarea>
+    <label for="flora">Flora:</label>
+    <textarea name="flora">{{ world.flora }}</textarea>
+    <label for="fauna">Fauna:</label>
+    <textarea name="fauna">{{ world.fauna }}</textarea>
+    <label for="magical_system">Magical System:</label>
+    <textarea name="magical_system">{{ world.magical_system }}</textarea>
+    <input type="submit" value="Save">
+</form>
+
+{% endblock %}

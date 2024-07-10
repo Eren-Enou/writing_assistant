@@ -1,14 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
+<h1>Add World</h1>
 
+<form action="{{ url_for('worlds.add_world') }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+    <label for="history">History:</label>
+    <textarea name="history"></textarea>
+    <label for="time_period">Time Period:</label>
+    <textarea name="time_period"></textarea>
+    <label for="setting">Setting:</label>
+    <textarea name="setting"></textarea>
+    <label for="temperature">Temperature:</label>
+    <textarea name="temperature"></textarea>
+    <label for="humidity">Humidity:</label>
+    <textarea name="humidity"></textarea>
+    <label for="flora">Flora:</label>
+    <textarea name="flora"></textarea>
+    <label for="fauna">Fauna:</label>
+    <textarea name="fauna"></textarea>
+    <label for="magical_system">Magical System:</label>
+    <textarea name="magical_system"></textarea>
+    <input type="submit" value="Add World">
+</form>
 
-name=request.form['name'],
-description=request.form['description'],
-history=request.form.get('history'),
-time_period=request.form.get('time_period'),
-setting=request.form.get('setting'),
-temperature=request.form.get('temperature'),
-humidity=request.form.get('humidity'),
-flora=request.form.get('flora'),
-fauna=request.form.get('fauna'),
-magical_system=request.form.get('magical_system')
+{% endblock %}

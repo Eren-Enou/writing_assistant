@@ -1,2 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+
+<h1>Worlds</h1>
+
+{% for world in worlds %}
+    <li><a href="{{ url_for('worlds.edit_world', id=world.id) }}">{{ world.name }}</a></li>
+{% endfor %}
+
+{% endblock %}
