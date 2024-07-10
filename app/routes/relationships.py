@@ -15,8 +15,8 @@ def add_relationship():
     form = RelationshipForm()
     if form.validate_on_submit():
         new_relationship = Relationship(
-            character1_id=form.character1_id.data,
-            character2_id=form.character2_id.data,
+            character1_id=form.character1.data.id,
+            character2_id=form.character2.data.id,
             relationship_type=form.relationship_type.data,
             description=form.description.data,
             level=form.level.data,
@@ -29,7 +29,7 @@ def add_relationship():
         db.session.add(new_relationship)
         db.session.commit()
         flash('Relationship created successfully!', 'success')
-        return redirect(url_for('relationships_bp.list_relationships'))
+        return redirect(url_for('relationships.list_relationships'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:

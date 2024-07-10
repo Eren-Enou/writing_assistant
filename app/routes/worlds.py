@@ -29,7 +29,7 @@ def add_world():
         db.session.add(new_world)
         db.session.commit()
         flash('World created successfully!', 'success')
-        return redirect(url_for('worlds_bp.list_worlds'))
+        return redirect(url_for('worlds.list_worlds'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -44,8 +44,8 @@ def edit_world(id):
         form.populate_obj(world)
         db.session.commit()
         flash('World updated successfully!', 'success')
-        return redirect(url_for('worlds_bp.list_worlds'))
-    return render_template('worlds/edit.html', form=form)
+        return redirect(url_for('worlds.list_worlds'))
+    return render_template('worlds/edit.html', form=form, world=world)
 
 
 

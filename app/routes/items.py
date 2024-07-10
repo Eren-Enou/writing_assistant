@@ -17,13 +17,21 @@ def add_item():
         new_item = Item(
             name=form.name.data,
             description=form.description.data,
-            type=form.type.data,
+            item_type=form.item_type.data,
             weight=form.weight.data,
             value=form.value.data,
             enchantment=form.enchantment.data,
-            owner_id=form.owner_id.data
+            owner_id=form.owner.data.id if form.owner.data else None
         )
         db.session.add(new_item)
+        db.session.commit()
+
+        # Add multiple associations
+        for location in form.locations.data:
+            new_item.locations.append(location)
+        for event in form.events.data:
+            new_item.events.append(event)
+
         db.session.commit()
         flash('Item created successfully!', 'success')
         return redirect(url_for('items_bp.list_items'))
@@ -32,6 +40,7 @@ def add_item():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('items/add.html', form=form)
+
 
 @items_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_item(id):

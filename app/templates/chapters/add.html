@@ -1,47 +1,72 @@
 {% extends "base.html" %}
 {% block content %}
-
 <h1>Add Chapter</h1>
 
-<form action="{{ url_for('chapters.add_chapter') }}" method="post" class="chapter-form add-form">
+<form method="POST">
     {{ form.hidden_tag() }}
-    <div class="form-group">
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" required>
-    </div>
-    <div class="form-group">
-        <label for="content">Content:</label>
-        <textarea id="content" name="content" required></textarea>
-    </div>
-    <div class="form-group">
-        <label for="plot_id">Plot ID:</label>
-        <input type="number" id="plot_id" name="plot_id" required>
-    </div>
-    <div class="form-group">
-        <label for="world_id">World ID:</label>
-        <input type="number" id="world_id" name="world_id" required>
-    </div>
-    <div class="form-group">
-        <label for="location_id">Location ID:</label>
-        <input type="number" id="location_id" name="location_id">
-    </div>
-    <div class="form-group">
-        <label for="creature_id">Creature ID:</label>
-        <input type="number" id="creature_id" name="creature_id">
-    </div>
-    <div class="form-group">
-        <label for="event_id">Event ID:</label>
-        <input type="number" id="event_id" name="event_id">
-    </div>
-    <div class="form-group">
-        <label for="magic_system_id">Magic System ID:</label>
-        <input type="number" id="magic_system_id" name="magic_system_id">
-    </div>
-    <div class="form-group">
-        <label for="faction_id">Faction ID:</label>
-        <input type="number" id="faction_id" name="faction_id">
-    </div>
-    <button type="submit" class="add-button">Add</button>
-</form>
 
+    <fieldset>
+        <legend>Basic Information</legend>
+        <div class="form-group">
+            {{ form.title.label }} {{ form.title(class="form-control") }}
+            {% if form.title.errors %}
+                <div class="text-danger">{{ form.title.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.content.label }} {{ form.content(class="form-control") }}
+            {% if form.content.errors %}
+                <div class="text-danger">{{ form.content.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.plot.label }} {{ form.plot(class="form-control") }}
+            {% if form.plot.errors %}
+                <div class="text-danger">{{ form.plot.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.creatures.label }} {{ form.creatures(class="form-control") }}
+            {% if form.creatures.errors %}
+                <div class="text-danger">{{ form.creatures.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.magic_systems.label }} {{ form.magic_systems(class="form-control") }}
+            {% if form.magic_systems.errors %}
+                <div class="text-danger">{{ form.magic_systems.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.factions.label }} {{ form.factions(class="form-control") }}
+            {% if form.factions.errors %}
+                <div class="text-danger">{{ form.factions.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary add-button">Add Chapter</button>
+</form>
 {% endblock %}

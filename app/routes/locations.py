@@ -17,11 +17,23 @@ def add_location():
         new_location = Location(
             name=form.name.data,
             description=form.description.data,
-            world_id=form.world_id.data,
+            world_id=form.world.data.id if form.world.data else None,
             climate=form.climate.data,
             terrain=form.terrain.data
         )
         db.session.add(new_location)
+        db.session.commit()
+
+        # Add multiple associations
+        for resident in form.residents.data:
+            new_location.residents.append(resident)
+        for faction in form.factions.data:
+            new_location.factions.append(faction)
+        for event in form.events.data:
+            new_location.events.append(event)
+        for plot in form.plots.data:
+            new_location.plots.append(plot)
+        
         db.session.commit()
         flash('Location created successfully!', 'success')
         return redirect(url_for('locations_bp.list_locations'))
@@ -30,6 +42,7 @@ def add_location():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('locations/add.html', form=form)
+
 
 @locations_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_location(id):

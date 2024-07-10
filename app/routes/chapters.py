@@ -17,15 +17,24 @@ def add_chapter():
         new_chapter = Chapter(
             title=form.title.data,
             content=form.content.data,
-            plot_id=form.plot_id.data,
-            world_id=form.world_id.data,
-            location_id=form.location_id.data,
-            creature_id=form.creature_id.data,
-            event_id=form.event_id.data,
-            magic_system_id=form.magic_system_id.data,
-            faction_id=form.faction_id.data
+            plot_id=form.plot.data.id if form.plot.data else None,
+            world_id=form.world.data.id if form.world.data else None,
         )
         db.session.add(new_chapter)
+        db.session.commit()
+
+        # Add multiple associations
+        for location in form.locations.data:
+            new_chapter.locations.append(location)
+        for creature in form.creatures.data:
+            new_chapter.creatures.append(creature)
+        for event in form.events.data:
+            new_chapter.events.append(event)
+        for magic_system in form.magic_systems.data:
+            new_chapter.magic_systems.append(magic_system)
+        for faction in form.factions.data:
+            new_chapter.factions.append(faction)
+        
         db.session.commit()
         flash('Chapter created successfully!', 'success')
         return redirect(url_for('chapters_bp.list_chapters'))
@@ -34,6 +43,7 @@ def add_chapter():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('chapters/add.html', form=form)
+
 
 @chapters_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_chapter(id):

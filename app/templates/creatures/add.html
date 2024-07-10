@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add Creature</h1>
-<form action="{{ url_for('creatures.add_creature') }}" method="post" class="creature-form add-form">
+
+<form method="POST">
     {{ form.hidden_tag() }}
-    <fieldset class="general-information">
-        <legend>General Information</legend>
+
+    <fieldset>
+        <legend>Basic Information</legend>
         <div class="form-group">
             {{ form.name.label }} {{ form.name(class="form-control") }}
             {% if form.name.errors %}
@@ -18,14 +20,11 @@
             {% endif %}
         </div>
         <div class="form-group">
-            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
-            {% if form.world_id.errors %}
-                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="physical-characteristics">
-        <legend>Physical Characteristics</legend>
         <div class="form-group">
             {{ form.species.label }} {{ form.species(class="form-control") }}
             {% if form.species.errors %}
@@ -44,9 +43,6 @@
                 <div class="text-danger">{{ form.age.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="role-and-abilities">
-        <legend>Role and Abilities</legend>
         <div class="form-group">
             {{ form.role.label }} {{ form.role(class="form-control") }}
             {% if form.role.errors %}
@@ -78,6 +74,29 @@
             {% endif %}
         </div>
     </fieldset>
-    <button type="submit" class="add-button">Add</button>
+
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.factions.label }} {{ form.factions(class="form-control") }}
+            {% if form.factions.errors %}
+                <div class="text-danger">{{ form.factions.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary add-button">Add Creature</button>
 </form>
 {% endblock %}

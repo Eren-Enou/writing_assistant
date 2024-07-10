@@ -18,7 +18,7 @@ def add_plot():
             title=form.title.data,
             summary=form.summary.data,
             description=form.description.data,
-            world_id=form.world_id.data,
+            world_id=form.world.data.id if form.world.data else None,
             status=form.status.data,
             genre=form.genre.data,
             rating=form.rating.data,
@@ -28,6 +28,16 @@ def add_plot():
         )
         db.session.add(new_plot)
         db.session.commit()
+
+        # Add multiple associations
+        for location in form.locations.data:
+            new_plot.locations.append(location)
+        for event in form.events.data:
+            new_plot.events.append(event)
+        for character in form.characters.data:
+            new_plot.characters.append(character)
+
+        db.session.commit()
         flash('Plot created successfully!', 'success')
         return redirect(url_for('plots_bp.list_plots'))
     if form.errors:
@@ -35,6 +45,7 @@ def add_plot():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('plots/add.html', form=form)
+
 
 @plots_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_plot(id):

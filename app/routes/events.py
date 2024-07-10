@@ -18,12 +18,20 @@ def add_event():
             name=form.name.data,
             description=form.description.data,
             date=form.date.data,
-            location_id=form.location_id.data,
-            faction_id=form.faction_id.data,
-            plot_id=form.plot_id.data,
-            world_id=form.world_id.data
+            location_id=form.location.data.id if form.location.data else None,
+            faction_id=form.faction.data.id if form.faction.data else None,
+            plot_id=form.plot.data.id if form.plot.data else None,
+            world_id=form.world.data.id if form.world.data else None,
         )
         db.session.add(new_event)
+        db.session.commit()
+
+        # Add multiple associations
+        for character in form.characters.data:
+            new_event.characters.append(character)
+        for creature in form.creatures.data:
+            new_event.creatures.append(creature)
+        
         db.session.commit()
         flash('Event created successfully!', 'success')
         return redirect(url_for('events_bp.list_events'))
@@ -32,6 +40,7 @@ def add_event():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('events/add.html', form=form)
+
 
 @events_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_event(id):

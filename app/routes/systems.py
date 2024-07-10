@@ -18,13 +18,13 @@ def add_system():
             name=form.name.data,
             description=form.description.data,
             rules=form.rules.data,
-            basis=form.basis.data,
-            world_id=form.world_id.data
+            basis=form.basis.data
         )
+        new_system.worlds = form.worlds.data
         db.session.add(new_system)
         db.session.commit()
         flash('System created successfully!', 'success')
-        return redirect(url_for('systems_bp.list_systems'))
+        return redirect(url_for('systems.list_systems'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:

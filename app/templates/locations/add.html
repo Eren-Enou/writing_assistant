@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add Location</h1>
-<form action="{{ url_for('locations.add_location') }}" method="post" class="location-form add-form">
+
+<form method="POST">
     {{ form.hidden_tag() }}
-    <fieldset class="basic-information">
+
+    <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
             {{ form.name.label }} {{ form.name(class="form-control") }}
@@ -18,14 +20,11 @@
             {% endif %}
         </div>
         <div class="form-group">
-            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
-            {% if form.world_id.errors %}
-                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="geographic-characteristics">
-        <legend>Geographic Characteristics</legend>
         <div class="form-group">
             {{ form.climate.label }} {{ form.climate(class="form-control") }}
             {% if form.climate.errors %}
@@ -39,6 +38,35 @@
             {% endif %}
         </div>
     </fieldset>
-    <button type="submit" class="add-button">Add</button>
+
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.residents.label }} {{ form.residents(class="form-control") }}
+            {% if form.residents.errors %}
+                <div class="text-danger">{{ form.residents.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.factions.label }} {{ form.factions(class="form-control") }}
+            {% if form.factions.errors %}
+                <div class="text-danger">{{ form.factions.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.plots.label }} {{ form.plots(class="form-control") }}
+            {% if form.plots.errors %}
+                <div class="text-danger">{{ form.plots.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary add-button">Add Location</button>
 </form>
 {% endblock %}

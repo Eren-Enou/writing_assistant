@@ -17,7 +17,7 @@ def add_faction():
         new_faction = Faction(
             name=form.name.data,
             description=form.description.data,
-            world_id=form.world_id.data,
+            world_id=form.world.data.id if form.world.data else None,
             is_neutral=form.is_neutral.data,
             is_good=form.is_good.data,
             is_evil=form.is_evil.data,
@@ -27,6 +27,14 @@ def add_faction():
         )
         db.session.add(new_faction)
         db.session.commit()
+
+        # Add multiple associations
+        for character in form.characters.data:
+            new_faction.characters.append(character)
+        for event in form.events.data:
+            new_faction.events.append(event)
+        
+        db.session.commit()
         flash('Faction created successfully!', 'success')
         return redirect(url_for('factions_bp.list_factions'))
     if form.errors:
@@ -34,6 +42,7 @@ def add_faction():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('factions/add.html', form=form)
+
 
 @factions_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_faction(id):

@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add System</h1>
-<form action="{{ url_for('systems.add_system') }}" method="post" class="system-form add-form">
+
+<form method="POST">
     {{ form.hidden_tag() }}
-    <fieldset class="general-information">
+
+    <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
             {{ form.name.label }} {{ form.name(class="form-control") }}
@@ -18,7 +20,8 @@
             {% endif %}
         </div>
     </fieldset>
-    <fieldset class="details">
+
+    <fieldset>
         <legend>Details</legend>
         <div class="form-group">
             {{ form.rules.label }} {{ form.rules(class="form-control") }}
@@ -32,13 +35,18 @@
                 <div class="text-danger">{{ form.basis.errors[0] }}</div>
             {% endif %}
         </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Worlds</legend>
         <div class="form-group">
-            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
-            {% if form.world_id.errors %}
-                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {{ form.worlds.label }} {{ form.worlds(class="form-control") }}
+            {% if form.worlds.errors %}
+                <div class="text-danger">{{ form.worlds.errors[0] }}</div>
             {% endif %}
         </div>
     </fieldset>
-    <button type="submit" class="add-button">Add</button>
+
+    <button type="submit" class="btn btn-primary add-button">Add System</button>
 </form>
 {% endblock %}

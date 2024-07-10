@@ -17,7 +17,7 @@ def add_creature():
         new_creature = Creature(
             name=form.name.data,
             description=form.description.data,
-            world_id=form.world_id.data,
+            world_id=form.world.data.id if form.world.data else None,
             species=form.species.data,
             size=form.size.data,
             age=form.age.data,
@@ -29,6 +29,16 @@ def add_creature():
         )
         db.session.add(new_creature)
         db.session.commit()
+
+        # Add multiple associations
+        for event in form.events.data:
+            new_creature.events.append(event)
+        for faction in form.factions.data:
+            new_creature.factions.append(faction)
+        for location in form.locations.data:
+            new_creature.locations.append(location)
+        
+        db.session.commit()
         flash('Creature created successfully!', 'success')
         return redirect(url_for('creatures_bp.list_creatures'))
     if form.errors:
@@ -36,6 +46,7 @@ def add_creature():
             for error in errors:
                 flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('creatures/add.html', form=form)
+
 
 @creatures_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_creature(id):

@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Add Plot</h1>
-<form action="{{ url_for('plots.add_plot') }}" method="post" class="plot-form add-form">
+
+<form method="POST">
     {{ form.hidden_tag() }}
-    <fieldset class="general-information">
+
+    <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
             {{ form.title.label }} {{ form.title(class="form-control") }}
@@ -23,13 +25,10 @@
                 <div class="text-danger">{{ form.description.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="details">
-        <legend>Details</legend>
         <div class="form-group">
-            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
-            {% if form.world_id.errors %}
-                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
             {% endif %}
         </div>
         <div class="form-group">
@@ -44,9 +43,6 @@
                 <div class="text-danger">{{ form.genre.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="metrics">
-        <legend>Metrics</legend>
         <div class="form-group">
             {{ form.rating.label }} {{ form.rating(class="form-control") }}
             {% if form.rating.errors %}
@@ -65,9 +61,6 @@
                 <div class="text-danger">{{ form.reading_time.errors[0] }}</div>
             {% endif %}
         </div>
-    </fieldset>
-    <fieldset class="publication">
-        <legend>Publication</legend>
         <div class="form-group">
             {{ form.published_date.label }} {{ form.published_date(class="form-control") }}
             {% if form.published_date.errors %}
@@ -75,6 +68,29 @@
             {% endif %}
         </div>
     </fieldset>
-    <button type="submit" class="add-button">Add</button>
+
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.characters.label }} {{ form.characters(class="form-control") }}
+            {% if form.characters.errors %}
+                <div class="text-danger">{{ form.characters.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary add-button">Add Plot</button>
 </form>
 {% endblock %}
