@@ -16,7 +16,7 @@ class PlotForm(FlaskForm):
     rating = IntegerField('Rating', validators=[Optional()])
     word_count = IntegerField('Word Count', validators=[Optional()])
     reading_time = IntegerField('Reading Time', validators=[Optional()])
-    published_date = DateTimeField('Published Date', validators=[Optional()])
+    published_date = DateTimeField('Published Date', format='%Y-%m-%d', validators=[Optional()])
 
     # Multiple Select Fields
     locations = QuerySelectMultipleField('Locations', query_factory=lambda: Location.query.all(), get_label='name')

@@ -8,7 +8,7 @@ from app.models import Plot, World, Location, Creature, Faction, Character
 class EventForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(max=100)])
     description = TextAreaField('Description', validators=[DataRequired()])
-    date = DateTimeField('Date', format='%Y-%m-%d %H:%M:%S', validators=[DataRequired()])
+    date = StringField('Date', validators=[DataRequired(), Length(max=100)])
     location = QuerySelectField('Location', query_factory=lambda: Location.query.all(), get_label='name', allow_blank=True, validators=[Optional()])
     faction = QuerySelectField('Faction', query_factory=lambda: Faction.query.all(), get_label='name', allow_blank=True, validators=[Optional()])
     plot = QuerySelectField('Plot', query_factory=lambda: Plot.query.all(), get_label='title', allow_blank=True, validators=[Optional()])

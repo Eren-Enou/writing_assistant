@@ -44,8 +44,8 @@ def edit_relationship(id):
         form.populate_obj(relationship)
         db.session.commit()
         flash('Relationship updated successfully!', 'success')
-        return redirect(url_for('relationships_bp.list_relationships'))
-    return render_template('relationships/edit.html', form=form)
+        return redirect(url_for('relationships.list_relationships'))
+    return render_template('relationships/edit.html', form=form, relationship=relationship)
 
 
 @relationships_bp.route('/<int:id>/delete', methods=['POST'])

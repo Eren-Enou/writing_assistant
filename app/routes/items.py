@@ -34,7 +34,7 @@ def add_item():
 
         db.session.commit()
         flash('Item created successfully!', 'success')
-        return redirect(url_for('items_bp.list_items'))
+        return redirect(url_for('items.list_items'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -50,8 +50,8 @@ def edit_item(id):
         form.populate_obj(item)
         db.session.commit()
         flash('Item updated successfully!', 'success')
-        return redirect(url_for('items_bp.list_items'))
-    return render_template('items/edit.html', form=form)
+        return redirect(url_for('items.list_items'))
+    return render_template('items/edit.html', form=form, item=item)
 
 
 @items_bp.route('/<int:id>/delete', methods=['POST'])

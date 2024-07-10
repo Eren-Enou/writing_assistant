@@ -39,8 +39,8 @@ def edit_system(id):
         form.populate_obj(system)
         db.session.commit()
         flash('System updated successfully!', 'success')
-        return redirect(url_for('systems_bp.list_systems'))
-    return render_template('systems/edit.html', form=form)
+        return redirect(url_for('systems.list_systems'))
+    return render_template('systems/edit.html', form=form, system=system)
 
 
 @systems_bp.route('/<int:id>/delete', methods=['POST'])

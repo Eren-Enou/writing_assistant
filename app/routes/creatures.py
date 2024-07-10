@@ -40,7 +40,7 @@ def add_creature():
         
         db.session.commit()
         flash('Creature created successfully!', 'success')
-        return redirect(url_for('creatures_bp.list_creatures'))
+        return redirect(url_for('creatures.list_creatures'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -56,8 +56,8 @@ def edit_creature(id):
         form.populate_obj(creature)
         db.session.commit()
         flash('Creature updated successfully!', 'success')
-        return redirect(url_for('creatures_bp.list_creatures'))
-    return render_template('creatures/edit.html', form=form)
+        return redirect(url_for('creatures.list_creatures'))
+    return render_template('creatures/edit.html', form=form, creature=creature)
 
 @creatures_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_creature(id):

@@ -27,9 +27,9 @@
     <fieldset>
         <legend>Details</legend>
         <div class="form-group">
-            {{ form.world_id.label }} {{ form.world_id(class="form-control") }}
-            {% if form.world_id.errors %}
-                <div class="text-danger">{{ form.world_id.errors[0] }}</div>
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
             {% endif %}
         </div>
         <div class="form-group">
@@ -72,6 +72,27 @@
             {{ form.published_date.label }} {{ form.published_date(class="form-control") }}
             {% if form.published_date.errors %}
                 <div class="text-danger">{{ form.published_date.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.characters.label }} {{ form.characters(class="form-control") }}
+            {% if form.characters.errors %}
+                <div class="text-danger">{{ form.characters.errors[0] }}</div>
             {% endif %}
         </div>
     </fieldset>

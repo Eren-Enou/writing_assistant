@@ -37,7 +37,7 @@ def add_chapter():
         
         db.session.commit()
         flash('Chapter created successfully!', 'success')
-        return redirect(url_for('chapters_bp.list_chapters'))
+        return redirect(url_for('chapters.list_chapters'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -53,8 +53,8 @@ def edit_chapter(id):
         form.populate_obj(chapter)
         db.session.commit()
         flash('Chapter updated successfully!', 'success')
-        return redirect(url_for('chapters_bp.list_chapters'))
-    return render_template('chapters/edit.html', form=form)
+        return redirect(url_for('chapters.list_chapters'))
+    return render_template('chapters/edit.html', form=form, chapter=chapter)
 
 @chapters_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_chapter(id):

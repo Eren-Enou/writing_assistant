@@ -78,6 +78,27 @@
             {% endif %}
         </div>
     </fieldset>
+    <fieldset>
+        <legend>Associations</legend>
+        <div class="form-group">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.factions.label }} {{ form.factions(class="form-control") }}
+            {% if form.factions.errors %}
+                <div class="text-danger">{{ form.factions.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
     <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

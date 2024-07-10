@@ -39,7 +39,7 @@ def add_plot():
 
         db.session.commit()
         flash('Plot created successfully!', 'success')
-        return redirect(url_for('plots_bp.list_plots'))
+        return redirect(url_for('plots.list_plots'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -55,8 +55,8 @@ def edit_plot(id):
         form.populate_obj(plot)
         db.session.commit()
         flash('Plot updated successfully!', 'success')
-        return redirect(url_for('plots_bp.list_plots'))
-    return render_template('plots/edit.html', form=form)
+        return redirect(url_for('plots.list_plots'))
+    return render_template('plots/edit.html', form=form, plot=plot)
 
 @plots_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_plot(id):

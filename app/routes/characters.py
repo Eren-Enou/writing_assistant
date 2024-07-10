@@ -54,7 +54,7 @@ def edit_character(id):
         db.session.commit()
         flash('Character updated successfully!', 'success')
         return redirect(url_for('characters.list_characters'))
-    return render_template('characters/edit.html', form=form)
+    return render_template('characters/edit.html', form=form, character=character)
 
 @characters_bp.route('/delete/<int:id>', methods=['POST'])
 def delete_character(id):

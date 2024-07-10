@@ -36,7 +36,7 @@ def add_location():
         
         db.session.commit()
         flash('Location created successfully!', 'success')
-        return redirect(url_for('locations_bp.list_locations'))
+        return redirect(url_for('locations.list_locations'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -52,8 +52,8 @@ def edit_location(id):
         form.populate_obj(location)
         db.session.commit()
         flash('Location updated successfully!', 'success')
-        return redirect(url_for('locations_bp.list_locations'))
-    return render_template('locations/edit.html', form=form)
+        return redirect(url_for('locations.list_locations'))
+    return render_template('locations/edit.html', form=form, location=location)
 
 
 @locations_bp.route('/<int:id>/delete', methods=['POST'])

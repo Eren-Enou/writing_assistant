@@ -34,7 +34,7 @@ def add_event():
         
         db.session.commit()
         flash('Event created successfully!', 'success')
-        return redirect(url_for('events_bp.list_events'))
+        return redirect(url_for('events.list_events'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -50,8 +50,8 @@ def edit_event(id):
         form.populate_obj(event)
         db.session.commit()
         flash('Event updated successfully!', 'success')
-        return redirect(url_for('events_bp.list_events'))
-    return render_template('events/edit.html', form=form)
+        return redirect(url_for('events.list_events'))
+    return render_template('events/edit.html', form=form, event=event)
 
 
 @events_bp.route('/<int:id>/delete', methods=['POST'])

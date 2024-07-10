@@ -36,7 +36,7 @@ def add_faction():
         
         db.session.commit()
         flash('Faction created successfully!', 'success')
-        return redirect(url_for('factions_bp.list_factions'))
+        return redirect(url_for('factions.list_factions'))
     if form.errors:
         for field, errors in form.errors.items():
             for error in errors:
@@ -52,8 +52,8 @@ def edit_faction(id):
         form.populate_obj(faction)
         db.session.commit()
         flash('Faction updated successfully!', 'success')
-        return redirect(url_for('factions_bp.list_factions'))
-    return render_template('factions/edit.html', form=form)
+        return redirect(url_for('factions.list_factions'))
+    return render_template('factions/edit.html', form=form, faction=faction)
 
 
 @factions_bp.route('/<int:id>/delete', methods=['POST'])

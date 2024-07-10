@@ -7,43 +7,62 @@
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
-            <label for="title">Title:</label>
-            <input type="text" name="title" value="{{ chapter.title }}" required>
+            {{ form.title.label }} {{ form.title(class="form-control") }}
+            {% if form.title.errors %}
+                <div class="text-danger">{{ form.title.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="content">Content:</label>
-            <textarea name="content" required>{{ chapter.content }}</textarea>
+            {{ form.content.label }} {{ form.content(class="form-control") }}
+            {% if form.content.errors %}
+                <div class="text-danger">{{ form.content.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
+
     <fieldset>
         <legend>Associations</legend>
         <div class="form-group">
-            <label for="plot_id">Plot ID:</label>
-            <input type="text" name="plot_id" value="{{ chapter.plot_id }}" required>
+            {{ form.plot.label }} {{ form.plot(class="form-control") }}
+            {% if form.plot.errors %}
+                <div class="text-danger">{{ form.plot.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="world_id">World ID:</label>
-            <input type="text" name="world_id" value="{{ chapter.world_id }}" required>
+            {{ form.world.label }} {{ form.world(class="form-control") }}
+            {% if form.world.errors %}
+                <div class="text-danger">{{ form.world.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="location_id">Location ID:</label>
-            <input type="text" name="location_id" value="{{ chapter.location_id }}">
+            {{ form.locations.label }} {{ form.locations(class="form-control") }}
+            {% if form.locations.errors %}
+                <div class="text-danger">{{ form.locations.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="creature_id">Creature ID:</label>
-            <input type="text" name="creature_id" value="{{ chapter.creature_id }}">
+            {{ form.creatures.label }} {{ form.creatures(class="form-control") }}
+            {% if form.creatures.errors %}
+                <div class="text-danger">{{ form.creatures.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="event_id">Event ID:</label>
-            <input type="text" name="event_id" value="{{ chapter.event_id }}">
+            {{ form.events.label }} {{ form.events(class="form-control") }}
+            {% if form.events.errors %}
+                <div class="text-danger">{{ form.events.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="magic_system_id">Magic System ID:</label>
-            <input type="text" name="magic_system_id" value="{{ chapter.magic_system_id }}">
+            {{ form.magic_systems.label }} {{ form.magic_systems(class="form-control") }}
+            {% if form.magic_systems.errors %}
+                <div class="text-danger">{{ form.magic_systems.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="faction_id">Faction ID:</label>
-            <input type="text" name="faction_id" value="{{ chapter.faction_id }}">
+            {{ form.factions.label }} {{ form.factions(class="form-control") }}
+            {% if form.factions.errors %}
+                <div class="text-danger">{{ form.factions.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
     <button type="submit" class="edit-button">Update</button>
