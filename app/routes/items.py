@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.item import Item
 from ..forms import ItemForm
 from ..extensions import db
@@ -27,6 +27,10 @@ def add_item():
         db.session.commit()
         flash('Item created successfully!', 'success')
         return redirect(url_for('items_bp.list_items'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('items/add.html', form=form)
 
 @items_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

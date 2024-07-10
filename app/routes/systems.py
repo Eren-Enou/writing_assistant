@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.system import System
 from ..forms import SystemForm
 from ..extensions import db
@@ -25,6 +25,10 @@ def add_system():
         db.session.commit()
         flash('System created successfully!', 'success')
         return redirect(url_for('systems_bp.list_systems'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('systems/add.html', form=form)
 
 @systems_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

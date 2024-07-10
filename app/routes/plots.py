@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.plot import Plot
 from ..forms import PlotForm
 from ..extensions import db
@@ -30,6 +30,10 @@ def add_plot():
         db.session.commit()
         flash('Plot created successfully!', 'success')
         return redirect(url_for('plots_bp.list_plots'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('plots/add.html', form=form)
 
 @plots_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

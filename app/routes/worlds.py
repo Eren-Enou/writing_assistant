@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.world import World
 from ..forms import WorldForm
 from ..extensions import db
@@ -30,6 +30,10 @@ def add_world():
         db.session.commit()
         flash('World created successfully!', 'success')
         return redirect(url_for('worlds_bp.list_worlds'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('worlds/add.html', form=form)
 
 @worlds_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

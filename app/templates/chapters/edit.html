@@ -3,6 +3,7 @@
 <h1>Edit Chapter</h1>
 
 <form action="{{ url_for('chapters.edit_chapter', chapter_id=chapter.id) }}" method="POST" class="edit-form">
+    {{ form.hidden_tag() }}
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">

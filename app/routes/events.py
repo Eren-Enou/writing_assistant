@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.event import Event
 from ..forms import EventForm
 from ..extensions import db
@@ -27,6 +27,10 @@ def add_event():
         db.session.commit()
         flash('Event created successfully!', 'success')
         return redirect(url_for('events_bp.list_events'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('events/add.html', form=form)
 
 @events_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.creature import Creature
 from ..forms import CreatureForm
 from ..extensions import db
@@ -31,6 +31,10 @@ def add_creature():
         db.session.commit()
         flash('Creature created successfully!', 'success')
         return redirect(url_for('creatures_bp.list_creatures'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('creatures/add.html', form=form)
 
 @creatures_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

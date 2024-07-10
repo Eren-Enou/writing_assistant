@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.location import Location
 from ..forms import LocationForm
 from ..extensions import db
@@ -25,6 +25,10 @@ def add_location():
         db.session.commit()
         flash('Location created successfully!', 'success')
         return redirect(url_for('locations_bp.list_locations'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('locations/add.html', form=form)
 
 @locations_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

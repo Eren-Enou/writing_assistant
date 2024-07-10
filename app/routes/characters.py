@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..forms import CharacterForm
 from ..models import Character
 from ..extensions import db
@@ -39,6 +39,10 @@ def add_character():
         db.session.commit()
         flash('Character created successfully!', 'success')
         return redirect(url_for('characters.list_characters'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('characters/add.html', form=form)
 
 @characters_bp.route('/edit/<int:id>', methods=['GET', 'POST'])

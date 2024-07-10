@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from ..models.relationship import Relationship
 from ..forms import RelationshipForm
 from ..extensions import db
@@ -30,6 +30,10 @@ def add_relationship():
         db.session.commit()
         flash('Relationship created successfully!', 'success')
         return redirect(url_for('relationships_bp.list_relationships'))
+    if form.errors:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash(f"Error in {getattr(form, field).label.text}: {error}", 'danger')
     return render_template('relationships/add.html', form=form)
 
 @relationships_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
