@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Location</h1>
+
+<form action="{{ url_for('locations.add_location') }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+    <label for="world_id">World:</label>
+    <input type="text" name="world_id" required>
+    <label for="climate">Climate:</label>
+    <input type="text" name="climate" required>
+    <label for="terrain">Terrain:</label>
+    <input type="text" name="terrain" required>
+    <input type="submit" value="Add Location">
+</form>
+
+{% endblock %}
+
+

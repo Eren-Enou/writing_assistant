@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Edit Item</h1>
+
+<form action="{{ url_for('items.edit_item', id=item.id) }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ item.name }}" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required>{{ item.description }}</textarea>
+    <label for="type">Type:</label>
+    <input type="text" name="type" value="{{ item.type }}" required>
+    <label for="weight">Weight:</label>
+    <input type="text" name="weight" value="{{ item.weight }}">
+    <label for="value">Value:</label>
+    <input type="text" name="value" value="{{ item.value }}">
+    <label for="enchantment">Enchantment:</label>
+    <input type="text" name="enchantment" value="{{ item.enchantment }}">
+    <label for="owner_id">Owner:</label>
+    <input type="text" name="owner_id" value="{{ item.owner_id }}">
+    <input type="submit" value="Save">
+</form>
+{% endblock %}
+

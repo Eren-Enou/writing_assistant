@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Systems</h1>
+
+{% for system in systems %}
+    <li><a href="{{ url_for('systems.edit_system', id=system.id) }}">{{ system.name }}</a></li>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+name=request.form['name'],
+description=request.form['description'],
+history=request.form.get('history'),
+time_period=request.form.get('time_period'),
+setting=request.form.get('setting'),
+temperature=request.form.get('temperature'),
+humidity=request.form.get('humidity'),
+flora=request.form.get('flora'),
+fauna=request.form.get('fauna'),
+magical_system=request.form.get('magical_system')

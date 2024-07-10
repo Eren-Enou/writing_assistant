@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Characters</h1>
+    <ul>
+        {% for character in characters %}
+            <li><a href="{{ url_for('characters.edit_character', id=character.id) }}">{{ character.name }}</a></li>
+            <form action="{{ url_for('characters.delete_character', id=character.id) }}" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        {% endfor %}
+    </ul>
+{% endblock %}

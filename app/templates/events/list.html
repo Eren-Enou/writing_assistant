@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Events</h1>
+<ul>
+    {% for event in events %}
+        <li><a href="{{ url_for('events.edit_event', id=event.id) }}">{{ event.name }}</a></li>
+        <form action="{{ url_for('events.delete_event', id=event.id) }}" method="POST">
+            <input type="submit" value="Delete">
+        </form>
+    {% endfor %}
+</ul>
+
+{% endblock %}

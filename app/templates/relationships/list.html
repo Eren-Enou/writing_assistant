@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Relationships</h1>
+
+{% for relationship in relationships %}
+    <li><a href="{{ url_for('relationships.edit_relationship', id=relationship.id) }}">{{ relationship.relationship_type }}</a></li>
+{% endfor %}
+
+{% endblock %}

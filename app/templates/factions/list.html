@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Factions</h1>
+    <ul>
+        {% for faction in factions %}
+            <li><a href="{{ url_for('factions.edit_faction', id=faction.id) }}">{{ faction.name }}</a></li>
+            <form action="{{ url_for('factions.delete_faction', id=faction.id) }}" method="POST">
+                <input type="submit" value="Delete">
+            </form>
+        {% endfor %}
+    </ul>
+{% endblock %}  

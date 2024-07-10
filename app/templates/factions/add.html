@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Add Faction</h1>
+<form action="{{ url_for('factions.add_faction') }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+    <label for="world_id">World:</label>
+    <input type="text" name="world_id" required>
+    <label for="is_neutral">Is Neutral:</label>
+    <input type="checkbox" name="is_neutral">
+    <label for="is_good">Is Good:</label>
+    <input type="checkbox" name="is_good">
+    <label for="is_evil">Is Evil:</label>
+    <input type="checkbox" name="is_evil">
+    <label for="is_chaotic">Is Chaotic:</label>
+    <input type="checkbox" name="is_chaotic">
+    <label for="is_lawful">Is Lawful:</label>
+    <input type="checkbox" name="is_lawful">
+    <label for="alignment">Alignment:</label>
+    <input type="text" name="alignment">
+    <input type="submit" value="Add Faction">
+</form>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Plot</h1>
+
+<form action="{{ url_for('plots.add_plot') }}" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" required>
+    <label for="summary">Summary:</label>
+    <textarea name="summary" required></textarea>
+    <label for="description">Description:</label>
+    <textarea name="description"></textarea>
+    <label for="world_id">World:</label>
+    <input type="text" name="world_id" required>
+    <label for="status">Status:</label>
+    <input type="text" name="status">
+    <label for="genre">Genre:</label>
+    <input type="text" name="genre">
+    <label for="rating">Rating:</label>
+    <input type="text" name="rating">
+    <label for="word_count">Word Count:</label>
+    <input type="text" name="word_count">
+    <label for="reading_time">Reading Time:</label>
+    <input type="text" name="reading_time">
+    <label for="published_date">Published Date:</label>
+    <input type="text" name="published_date">
+    <input type="submit" value="Add Plot">
+</form>
+
+{% endblock %}

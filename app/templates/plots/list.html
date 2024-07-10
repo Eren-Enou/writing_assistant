@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Plots</h1>
+
+{% for plot in plots %}
+    <li><a href="{{ url_for('plots.edit_plot', id=plot.id) }}">{{ plot.title }}</a></li>
+{% endfor %}
+
+{% endblock %}

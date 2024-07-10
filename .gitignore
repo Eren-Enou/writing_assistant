@@ -1,0 +1,34 @@
+        
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.env
+.venv/
+dist/
+build/
+
+# Pip
+*.egg
+.cache/
+pip-wheel-metadata/
+
+# Testing
+.tox/
+.coverage
+.pytest_cache/
+htmlcov/
+
+# Dependency directories
+env/
+venv/
+
+# Editor directories and files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*.swo
+*~

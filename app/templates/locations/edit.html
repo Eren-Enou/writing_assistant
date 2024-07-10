@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit Location</h1>
+
+<form action="{{ url_for('locations.edit_location', id=location.id) }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ location.name }}" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required>{{ location.description }}</textarea>
+    <label for="world_id">World:</label>
+    <input type="text" name="world_id" value="{{ location.world_id }}" required>
+    <label for="climate">Climate:</label>
+    <input type="text" name="climate" value="{{ location.climate }}" required>
+    <label for="terrain">Terrain:</label>
+    <input type="text" name="terrain" value="{{ location.terrain }}" required>
+    <input type="submit" value="Save">
+</form>
+
+{% endblock %}

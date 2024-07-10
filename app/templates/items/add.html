@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Item</h1>
+<form action="{{ url_for('items.add_item') }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required></textarea>
+    <label for="type">Type:</label>
+    <input type="text" name="type" required>
+    <label for="weight">Weight:</label>
+    <input type="text" name="weight">
+    <label for="value">Value:</label>
+    <input type="text" name="value">
+    <label for="enchantment">Enchantment:</label>
+    <input type="text" name="enchantment">
+    <label for="owner_id">Owner:</label>
+    <input type="text" name="owner_id">
+    <input type="submit" value="Add Item">
+</form>
+{% endblock %}
+

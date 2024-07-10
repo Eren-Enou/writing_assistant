@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Edit System</h1>
+
+<form action="{{ url_for('systems.edit_system', id=system.id) }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" value="{{ system.name }}" required>
+    <label for="description">Description:</label>
+    <textarea name="description" required>{{ system.description }}</textarea>
+    <label for="rules">Rules:</label>
+    <textarea name="rules">{{ system.rules }}</textarea>
+    <label for="basis">Basis:</label>
+    <textarea name="basis">{{ system.basis }}</textarea>
+    <label for="world_id">World:</label>
+    <input type="text" name="world_id" value="{{ system.world_id }}" required>
+    <input type="submit" value="Save">
+</form>
+
+{% endblock %}

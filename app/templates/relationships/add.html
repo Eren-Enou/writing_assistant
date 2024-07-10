@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Add Relationship</h1>
+
+<form action="{{ url_for('relationships.add_relationship') }}" method="POST">
+    <label for="character1_id">Character 1:</label>
+    <input type="text" name="character1_id" required>
+    <label for="character2_id">Character 2:</label>
+    <input type="text" name="character2_id" required>
+    <label for="relationship_type">Relationship Type:</label>
+    <input type="text" name="relationship_type" required>
+    <label for="description">Description:</label>
+    <textarea name="description"></textarea>
+    <label for="level">Level:</label>
+    <input type="text" name="level">
+    <label for="is_romantic">Is Romantic:</label>
+    <input type="checkbox" name="is_romantic">
+    <label for="is_supportive">Is Supportive:</label>
+    <input type="checkbox" name="is_supportive">
+    <label for="is_rival">Is Rival:</label>
+    <input type="checkbox" name="is_rival">
+    <label for="is_ally">Is Ally:</label>
+    <input type="checkbox" name="is_ally">
+    <label for="is_conflict">Is Conflict:</label>
+    <input type="checkbox" name="is_conflict">
+    <input type="submit" value="Add Relationship">
+</form>
+
+{% endblock %}
