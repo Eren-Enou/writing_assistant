@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.chapter import Chapter
+from ..forms.chapter import ChapterForm
 from ..extensions import db
 
 chapters_bp = Blueprint('chapters', __name__, url_prefix='/chapters')
@@ -11,39 +12,35 @@ def list_chapters():
 
 @chapters_bp.route('/add', methods=['GET', 'POST'])
 def add_chapter():
-    if request.method == 'POST':
+    form = ChapterForm()
+    if form.validate_on_submit():
         new_chapter = Chapter(
-            title=request.form['title'],
-            content=request.form['content'],
-            plot_id=request.form['plot_id'],
-            world_id=request.form['world_id'],
-            location_id=request.form.get('location_id'),
-            creature_id=request.form.get('creature_id'),
-            event_id=request.form.get('event_id'),
-            magic_system_id=request.form.get('magic_system_id'),
-            faction_id=request.form.get('faction_id')
+            title=form.title.data,
+            content=form.content.data,
+            plot_id=form.plot_id.data,
+            world_id=form.world_id.data,
+            location_id=form.location_id.data,
+            creature_id=form.creature_id.data,
+            event_id=form.event_id.data,
+            magic_system_id=form.magic_system_id.data,
+            faction_id=form.faction_id.data
         )
         db.session.add(new_chapter)
         db.session.commit()
-        return redirect(url_for('chapters.list_chapters'))
-    return render_template('chapters/add.html')
+        flash('Chapter created successfully!', 'success')
+        return redirect(url_for('chapters_bp.list_chapters'))
+    return render_template('chapters/add.html', form=form)
 
-@chapters_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@chapters_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_chapter(id):
     chapter = Chapter.query.get_or_404(id)
-    if request.method == 'POST':
-        chapter.title = request.form['title']
-        chapter.content = request.form['content']
-        chapter.plot_id = request.form['plot_id']
-        chapter.world_id = request.form['world_id']
-        chapter.location_id = request.form.get('location_id')
-        chapter.creature_id = request.form.get('creature_id')
-        chapter.event_id = request.form.get('event_id')
-        chapter.magic_system_id = request.form.get('magic_system_id')
-        chapter.faction_id = request.form.get('faction_id')
+    form = ChapterForm(obj=chapter)
+    if form.validate_on_submit():
+        form.populate_obj(chapter)
         db.session.commit()
-        return redirect(url_for('chapters.list_chapters'))
-    return render_template('chapters/edit.html', chapter=chapter)
+        flash('Chapter updated successfully!', 'success')
+        return redirect(url_for('chapters_bp.list_chapters'))
+    return render_template('chapters/edit.html', form=form)
 
 @chapters_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_chapter(id):

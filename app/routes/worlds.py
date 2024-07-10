@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.world import World
+from ..forms import WorldForm
 from ..extensions import db
 
 worlds_bp = Blueprint('worlds', __name__, url_prefix='/worlds')
@@ -11,41 +12,38 @@ def list_worlds():
 
 @worlds_bp.route('/add', methods=['GET', 'POST'])
 def add_world():
-    if request.method == 'POST':
+    form = WorldForm()
+    if form.validate_on_submit():
         new_world = World(
-            name=request.form['name'],
-            description=request.form['description'],
-            history=request.form.get('history'),
-            time_period=request.form.get('time_period'),
-            setting=request.form.get('setting'),
-            temperature=request.form.get('temperature'),
-            humidity=request.form.get('humidity'),
-            flora=request.form.get('flora'),
-            fauna=request.form.get('fauna'),
-            magical_system=request.form.get('magical_system')
+            name=form.name.data,
+            description=form.description.data,
+            history=form.history.data,
+            time_period=form.time_period.data,
+            setting=form.setting.data,
+            temperature=form.temperature.data,
+            humidity=form.humidity.data,
+            flora=form.flora.data,
+            fauna=form.fauna.data,
+            magical_system=form.magical_system.data
         )
         db.session.add(new_world)
         db.session.commit()
-        return redirect(url_for('worlds.list_worlds'))
-    return render_template('worlds/add.html')
+        flash('World created successfully!', 'success')
+        return redirect(url_for('worlds_bp.list_worlds'))
+    return render_template('worlds/add.html', form=form)
 
-@worlds_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@worlds_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_world(id):
     world = World.query.get_or_404(id)
-    if request.method == 'POST':
-        world.name = request.form['name']
-        world.description = request.form['description']
-        world.history = request.form.get('history')
-        world.time_period = request.form.get('time_period')
-        world.setting = request.form.get('setting')
-        world.temperature = request.form.get('temperature')
-        world.humidity = request.form.get('humidity')
-        world.flora = request.form.get('flora')
-        world.fauna = request.form.get('fauna')
-        world.magical_system = request.form.get('magical_system')
+    form = WorldForm(obj=world)
+    if form.validate_on_submit():
+        form.populate_obj(world)
         db.session.commit()
-        return redirect(url_for('worlds.list_worlds'))
-    return render_template('worlds/edit.html', world=world)
+        flash('World updated successfully!', 'success')
+        return redirect(url_for('worlds_bp.list_worlds'))
+    return render_template('worlds/edit.html', form=form)
+
+
 
 @worlds_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_world(id):

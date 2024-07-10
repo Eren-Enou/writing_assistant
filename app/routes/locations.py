@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.location import Location
+from ..forms import LocationForm
 from ..extensions import db
 
 locations_bp = Blueprint('locations', __name__, url_prefix='/locations')
@@ -11,31 +12,32 @@ def list_locations():
 
 @locations_bp.route('/add', methods=['GET', 'POST'])
 def add_location():
-    if request.method == 'POST':
+    form = LocationForm()
+    if form.validate_on_submit():
         new_location = Location(
-            name=request.form['name'],
-            description=request.form['description'],
-            world_id=request.form['world_id'],
-            climate=request.form['climate'],
-            terrain=request.form['terrain']
+            name=form.name.data,
+            description=form.description.data,
+            world_id=form.world_id.data,
+            climate=form.climate.data,
+            terrain=form.terrain.data
         )
         db.session.add(new_location)
         db.session.commit()
-        return redirect(url_for('locations.list_locations'))
-    return render_template('locations/add.html')
+        flash('Location created successfully!', 'success')
+        return redirect(url_for('locations_bp.list_locations'))
+    return render_template('locations/add.html', form=form)
 
-@locations_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@locations_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_location(id):
     location = Location.query.get_or_404(id)
-    if request.method == 'POST':
-        location.name = request.form['name']
-        location.description = request.form['description']
-        location.world_id = request.form['world_id']
-        location.climate = request.form['climate']
-        location.terrain = request.form['terrain']
+    form = LocationForm(obj=location)
+    if form.validate_on_submit():
+        form.populate_obj(location)
         db.session.commit()
-        return redirect(url_for('locations.list_locations'))
-    return render_template('locations/edit.html', location=location)
+        flash('Location updated successfully!', 'success')
+        return redirect(url_for('locations_bp.list_locations'))
+    return render_template('locations/edit.html', form=form)
+
 
 @locations_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_location(id):

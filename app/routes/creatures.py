@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.creature import Creature
+from ..forms import CreatureForm
 from ..extensions import db
 
 creatures_bp = Blueprint('creatures', __name__, url_prefix='/creatures')
@@ -11,43 +12,37 @@ def list_creatures():
 
 @creatures_bp.route('/add', methods=['GET', 'POST'])
 def add_creature():
-    if request.method == 'POST':
+    form = CreatureForm()
+    if form.validate_on_submit():
         new_creature = Creature(
-            name=request.form['name'],
-            description=request.form['description'],
-            world_id=request.form['world_id'],
-            species=request.form['species'],
-            size=request.form['size'],
-            age=request.form.get('age'),
-            role=request.form['role'],
-            align=request.form['align'],
-            abilities=request.form.get('abilities'),
-            weapons=request.form.get('weapons'),
-            armor=request.form.get('armor')
+            name=form.name.data,
+            description=form.description.data,
+            world_id=form.world_id.data,
+            species=form.species.data,
+            size=form.size.data,
+            age=form.age.data,
+            role=form.role.data,
+            align=form.align.data,
+            abilities=form.abilities.data,
+            weapons=form.weapons.data,
+            armor=form.armor.data
         )
         db.session.add(new_creature)
         db.session.commit()
-        return redirect(url_for('creatures.list_creatures'))
-    return render_template('creatures/add.html')
+        flash('Creature created successfully!', 'success')
+        return redirect(url_for('creatures_bp.list_creatures'))
+    return render_template('creatures/add.html', form=form)
 
-@creatures_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@creatures_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_creature(id):
     creature = Creature.query.get_or_404(id)
-    if request.method == 'POST':
-        creature.name = request.form['name']
-        creature.description = request.form['description']
-        creature.world_id = request.form['world_id']
-        creature.species = request.form['species']
-        creature.size = request.form['size']
-        creature.age = request.form.get('age')
-        creature.role = request.form['role']
-        creature.align = request.form['align']
-        creature.abilities = request.form.get('abilities')
-        creature.weapons = request.form.get('weapons')
-        creature.armor = request.form.get('armor')
+    form = CreatureForm(obj=creature)
+    if form.validate_on_submit():
+        form.populate_obj(creature)
         db.session.commit()
-        return redirect(url_for('creatures.list_creatures'))
-    return render_template('creatures/edit.html', creature=creature)
+        flash('Creature updated successfully!', 'success')
+        return redirect(url_for('creatures_bp.list_creatures'))
+    return render_template('creatures/edit.html', form=form)
 
 @creatures_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_creature(id):

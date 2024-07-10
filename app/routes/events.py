@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.event import Event
+from ..forms import EventForm
 from ..extensions import db
 
 events_bp = Blueprint('events', __name__, url_prefix='/events')
@@ -11,35 +12,34 @@ def list_events():
 
 @events_bp.route('/add', methods=['GET', 'POST'])
 def add_event():
-    if request.method == 'POST':
+    form = EventForm()
+    if form.validate_on_submit():
         new_event = Event(
-            name=request.form['name'],
-            description=request.form['description'],
-            date=request.form['date'],
-            location_id=request.form.get('location_id'),
-            faction_id=request.form.get('faction_id'),
-            plot_id=request.form.get('plot_id'),
-            world_id=request.form['world_id']
+            name=form.name.data,
+            description=form.description.data,
+            date=form.date.data,
+            location_id=form.location_id.data,
+            faction_id=form.faction_id.data,
+            plot_id=form.plot_id.data,
+            world_id=form.world_id.data
         )
         db.session.add(new_event)
         db.session.commit()
-        return redirect(url_for('events.list_events'))
-    return render_template('events/add.html')
+        flash('Event created successfully!', 'success')
+        return redirect(url_for('events_bp.list_events'))
+    return render_template('events/add.html', form=form)
 
-@events_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@events_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_event(id):
     event = Event.query.get_or_404(id)
-    if request.method == 'POST':
-        event.name = request.form['name']
-        event.description = request.form['description']
-        event.date = request.form['date']
-        event.location_id = request.form.get('location_id')
-        event.faction_id = request.form.get('faction_id')
-        event.plot_id = request.form.get('plot_id')
-        event.world_id = request.form['world_id']
+    form = EventForm(obj=event)
+    if form.validate_on_submit():
+        form.populate_obj(event)
         db.session.commit()
-        return redirect(url_for('events.list_events'))
-    return render_template('events/edit.html', event=event)
+        flash('Event updated successfully!', 'success')
+        return redirect(url_for('events_bp.list_events'))
+    return render_template('events/edit.html', form=form)
+
 
 @events_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_event(id):

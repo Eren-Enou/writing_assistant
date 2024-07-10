@@ -2,92 +2,123 @@
 {% block content %}
 <h1>Edit Character</h1>
 
-<form action="{{ url_for('characters.edit_character', id=character.id) }}" method="POST" class="edit-form">
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
     <fieldset>
-        <legend>Personal Details</legend>
+        <legend>Basic Information</legend>
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{ character.name }}" required>
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea name="description" required>{{ character.description }}</textarea>
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="race">Race:</label>
-            <input type="text" name="race" value="{{ character.race }}" required>
+            {{ form.race.label }} {{ form.race(class="form-control") }}
+            {% if form.race.errors %}
+                <div class="text-danger">{{ form.race.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="class_">Class:</label>
-            <input type="text" name="class_" value="{{ character.class_ }}" required>
-        </div>
-        <div class="form-group">
-            <label for="deity">Deity:</label>
-            <input type="text" name="deity" value="{{ character.deity }}">
-        </div>
-        <div class="form-group">
-            <label for="age">Age:</label>
-            <input type="text" name="age" value="{{ character.age }}" required>
-        </div>
-        <div class="form-group">
-            <label for="alignment">Alignment:</label>
-            <input type="text" name="alignment" value="{{ character.alignment }}" required>
+            {{ form.class_.label }} {{ form.class_(class="form-control") }}
+            {% if form.class_.errors %}
+                <div class="text-danger">{{ form.class_.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
+
     <fieldset>
         <legend>Attributes</legend>
         <div class="form-group">
-            <label for="strength">Strength:</label>
-            <input type="text" name="strength" value="{{ character.strength }}" required>
+            {{ form.age.label }} {{ form.age(class="form-control") }}
+            {% if form.age.errors %}
+                <div class="text-danger">{{ form.age.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="dexterity">Dexterity:</label>
-            <input type="text" name="dexterity" value="{{ character.dexterity }}" required>
+            {{ form.alignment.label }} {{ form.alignment(class="form-control") }}
+            {% if form.alignment.errors %}
+                <div class="text-danger">{{ form.alignment.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="constitution">Constitution:</label>
-            <input type="text" name="constitution" value="{{ character.constitution }}" required>
+            {{ form.strength.label }} {{ form.strength(class="form-control") }}
+            {% if form.strength.errors %}
+                <div class="text-danger">{{ form.strength.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="intelligence">Intelligence:</label>
-            <input type="text" name="intelligence" value="{{ character.intelligence }}" required>
+            {{ form.dexterity.label }} {{ form.dexterity(class="form-control") }}
+            {% if form.dexterity.errors %}
+                <div class="text-danger">{{ form.dexterity.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="wisdom">Wisdom:</label>
-            <input type="text" name="wisdom" value="{{ character.wisdom }}" required>
+            {{ form.constitution.label }} {{ form.constitution(class="form-control") }}
+            {% if form.constitution.errors %}
+                <div class="text-danger">{{ form.constitution.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="charisma">Charisma:</label>
-            <input type="text" name="charisma" value="{{ character.charisma }}" required>
+            {{ form.intelligence.label }} {{ form.intelligence(class="form-control") }}
+            {% if form.intelligence.errors %}
+                <div class="text-danger">{{ form.intelligence.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.wisdom.label }} {{ form.wisdom(class="form-control") }}
+            {% if form.wisdom.errors %}
+                <div class="text-danger">{{ form.wisdom.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.charisma.label }} {{ form.charisma(class="form-control") }}
+            {% if form.charisma.errors %}
+                <div class="text-danger">{{ form.charisma.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
+
     <fieldset>
         <legend>Background</legend>
         <div class="form-group">
-            <label for="experience_points">Experience Points:</label>
-            <input type="text" name="experience_points" value="{{ character.experience_points }}" required>
+            {{ form.background.label }} {{ form.background(class="form-control") }}
+            {% if form.background.errors %}
+                <div class="text-danger">{{ form.background.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="background">Background:</label>
-            <input type="text" name="background" value="{{ character.background }}" required>
+            {{ form.personality.label }} {{ form.personality(class="form-control") }}
+            {% if form.personality.errors %}
+                <div class="text-danger">{{ form.personality.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="personality">Personality:</label>
-            <input type="text" name="personality" value="{{ character.personality }}" required>
+            {{ form.ideal.label }} {{ form.ideal(class="form-control") }}
+            {% if form.ideal.errors %}
+                <div class="text-danger">{{ form.ideal.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="ideal">Ideal:</label>
-            <input type="text" name="ideal" value="{{ character.ideal }}" required>
+            {{ form.bonds.label }} {{ form.bonds(class="form-control") }}
+            {% if form.bonds.errors %}
+                <div class="text-danger">{{ form.bonds.errors[0] }}</div>
+            {% endif %}
         </div>
         <div class="form-group">
-            <label for="bonds">Bonds:</label>
-            <input type="text" name="bonds" value="{{ character.bonds }}" required>
-        </div>
-        <div class="form-group">
-            <label for="flaws">Flaws:</label>
-            <input type="text" name="flaws" value="{{ character.flaws }}" required>
+            {{ form.flaws.label }} {{ form.flaws(class="form-control") }}
+            {% if form.flaws.errors %}
+                <div class="text-danger">{{ form.flaws.errors[0] }}</div>
+            {% endif %}
         </div>
     </fieldset>
-    <button type="submit" class="edit-button">Update</button>
+
+    <button type="submit" class="btn btn-primary edit-button">Save Changes</button>
 </form>
 {% endblock %}

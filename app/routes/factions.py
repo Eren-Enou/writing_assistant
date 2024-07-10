@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.faction import Faction
+from ..forms import FactionForm
 from ..extensions import db
 
 factions_bp = Blueprint('factions', __name__, url_prefix='/factions')
@@ -11,39 +12,36 @@ def list_factions():
 
 @factions_bp.route('/add', methods=['GET', 'POST'])
 def add_faction():
-    if request.method == 'POST':
+    form = FactionForm()
+    if form.validate_on_submit():
         new_faction = Faction(
-            name=request.form['name'],
-            description=request.form['description'],
-            world_id=request.form['world_id'],
-            is_neutral=request.form.get('is_neutral') == 'on',
-            is_good=request.form.get('is_good') == 'on',
-            is_evil=request.form.get('is_evil') == 'on',
-            is_chaotic=request.form.get('is_chaotic') == 'on',
-            is_lawful=request.form.get('is_lawful') == 'on',
-            alignment=request.form.get('alignment')
+            name=form.name.data,
+            description=form.description.data,
+            world_id=form.world_id.data,
+            is_neutral=form.is_neutral.data,
+            is_good=form.is_good.data,
+            is_evil=form.is_evil.data,
+            is_chaotic=form.is_chaotic.data,
+            is_lawful=form.is_lawful.data,
+            alignment=form.alignment.data
         )
         db.session.add(new_faction)
         db.session.commit()
-        return redirect(url_for('factions.list_factions'))
-    return render_template('factions/add.html')
+        flash('Faction created successfully!', 'success')
+        return redirect(url_for('factions_bp.list_factions'))
+    return render_template('factions/add.html', form=form)
 
-@factions_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@factions_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_faction(id):
     faction = Faction.query.get_or_404(id)
-    if request.method == 'POST':
-        faction.name = request.form['name']
-        faction.description = request.form['description']
-        faction.world_id = request.form['world_id']
-        faction.is_neutral = request.form.get('is_neutral') == 'on'
-        faction.is_good = request.form.get('is_good') == 'on'
-        faction.is_evil = request.form.get('is_evil') == 'on'
-        faction.is_chaotic = request.form.get('is_chaotic') == 'on'
-        faction.is_lawful = request.form.get('is_lawful') == 'on'
-        faction.alignment = request.form.get('alignment')
+    form = FactionForm(obj=faction)
+    if form.validate_on_submit():
+        form.populate_obj(faction)
         db.session.commit()
-        return redirect(url_for('factions.list_factions'))
-    return render_template('factions/edit.html', faction=faction)
+        flash('Faction updated successfully!', 'success')
+        return redirect(url_for('factions_bp.list_factions'))
+    return render_template('factions/edit.html', form=form)
+
 
 @factions_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_faction(id):

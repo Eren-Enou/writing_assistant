@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.plot import Plot
+from ..forms import PlotForm
 from ..extensions import db
 
 plots_bp = Blueprint('plots', __name__, url_prefix='/plots')
@@ -11,41 +12,36 @@ def list_plots():
 
 @plots_bp.route('/add', methods=['GET', 'POST'])
 def add_plot():
-    if request.method == 'POST':
+    form = PlotForm()
+    if form.validate_on_submit():
         new_plot = Plot(
-            title=request.form['title'],
-            summary=request.form['summary'],
-            description=request.form.get('description'),
-            world_id=request.form['world_id'],
-            status=request.form.get('status'),
-            genre=request.form.get('genre'),
-            rating=request.form.get('rating'),
-            word_count=request.form.get('word_count'),
-            reading_time=request.form.get('reading_time'),
-            published_date=request.form.get('published_date')
+            title=form.title.data,
+            summary=form.summary.data,
+            description=form.description.data,
+            world_id=form.world_id.data,
+            status=form.status.data,
+            genre=form.genre.data,
+            rating=form.rating.data,
+            word_count=form.word_count.data,
+            reading_time=form.reading_time.data,
+            published_date=form.published_date.data
         )
         db.session.add(new_plot)
         db.session.commit()
-        return redirect(url_for('plots.list_plots'))
-    return render_template('plots/add.html')
+        flash('Plot created successfully!', 'success')
+        return redirect(url_for('plots_bp.list_plots'))
+    return render_template('plots/add.html', form=form)
 
-@plots_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@plots_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_plot(id):
     plot = Plot.query.get_or_404(id)
-    if request.method == 'POST':
-        plot.title = request.form['title']
-        plot.summary = request.form['summary']
-        plot.description = request.form.get('description')
-        plot.world_id = request.form['world_id']
-        plot.status = request.form.get('status')
-        plot.genre = request.form.get('genre')
-        plot.rating = request.form.get('rating')
-        plot.word_count = request.form.get('word_count')
-        plot.reading_time = request.form.get('reading_time')
-        plot.published_date = request.form.get('published_date')
+    form = PlotForm(obj=plot)
+    if form.validate_on_submit():
+        form.populate_obj(plot)
         db.session.commit()
-        return redirect(url_for('plots.list_plots'))
-    return render_template('plots/edit.html', plot=plot)
+        flash('Plot updated successfully!', 'success')
+        return redirect(url_for('plots_bp.list_plots'))
+    return render_template('plots/edit.html', form=form)
 
 @plots_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_plot(id):

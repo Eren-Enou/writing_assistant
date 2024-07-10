@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.item import Item
+from ..forms import ItemForm
 from ..extensions import db
 
 items_bp = Blueprint('items', __name__, url_prefix='/items')
@@ -11,35 +12,34 @@ def list_items():
 
 @items_bp.route('/add', methods=['GET', 'POST'])
 def add_item():
-    if request.method == 'POST':
+    form = ItemForm()
+    if form.validate_on_submit():
         new_item = Item(
-            name=request.form['name'],
-            description=request.form['description'],
-            type=request.form['type'],
-            weight=request.form.get('weight'),
-            value=request.form.get('value'),
-            enchantment=request.form.get('enchantment'),
-            owner_id=request.form.get('owner_id')
+            name=form.name.data,
+            description=form.description.data,
+            type=form.type.data,
+            weight=form.weight.data,
+            value=form.value.data,
+            enchantment=form.enchantment.data,
+            owner_id=form.owner_id.data
         )
         db.session.add(new_item)
         db.session.commit()
-        return redirect(url_for('items.list_items'))
-    return render_template('items/add.html')
+        flash('Item created successfully!', 'success')
+        return redirect(url_for('items_bp.list_items'))
+    return render_template('items/add.html', form=form)
 
-@items_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@items_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_item(id):
     item = Item.query.get_or_404(id)
-    if request.method == 'POST':
-        item.name = request.form['name']
-        item.description = request.form['description']
-        item.type = request.form['type']
-        item.weight = request.form.get('weight')
-        item.value = request.form.get('value')
-        item.enchantment = request.form.get('enchantment')
-        item.owner_id = request.form.get('owner_id')
+    form = ItemForm(obj=item)
+    if form.validate_on_submit():
+        form.populate_obj(item)
         db.session.commit()
-        return redirect(url_for('items.list_items'))
-    return render_template('items/edit.html', item=item)
+        flash('Item updated successfully!', 'success')
+        return redirect(url_for('items_bp.list_items'))
+    return render_template('items/edit.html', form=form)
+
 
 @items_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_item(id):

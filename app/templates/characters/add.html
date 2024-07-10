@@ -1,92 +1,124 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Add Character</h1>
-    <form action="{{ url_for('characters.add_character') }}" method="POST" class="add-form">
-        <fieldset class="personal-details">
-            <legend>Personal Details</legend>
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="description">Description:</label>
-                    <textarea name="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="race">Race:</label>
-                    <input type="text" name="race" required>
-                </div>
-                <div class="form-group">
-                    <label for="class_">Class:</label>
-                    <input type="text" name="class_" required>
-                </div>
-                <div class="form-group">
-                    <label for="deity">Deity:</label>
-                    <input type="text" name="deity">
-                </div>
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="text" name="age" required>
-                </div>
-                <div class="form-group">
-                    <label for="alignment">Alignment:</label>
-                    <input type="text" name="alignment" required>
-                </div>
-            </fieldset>
-            <fieldset class="attributes">
-                <legend>Attributes</legend>
-                <div class="form-group">
-                    <label for="strength">Strength:</label>
-                    <input type="text" name="strength" required>
-                </div>
-                <div class="form-group">
-                    <label for="dexterity">Dexterity:</label>
-                    <input type="text" name="dexterity" required>
-                </div>
-                <div class="form-group">
-                    <label for="constitution">Constitution:</label>
-                    <input type="text" name="constitution" required>
-                </div>
-                <div class="form-group">
-                    <label for="intelligence">Intelligence:</label>
-                    <input type="text" name="intelligence" required>
-                </div>
-                <div class="form-group">
-                    <label for="wisdom">Wisdom:</label>
-                    <input type="text" name="wisdom" required>
-                </div>
-                <div class="form-group">
-                    <label for="charisma">Charisma:</label>
-                    <input type="text" name="charisma" required>
-                </div>
-            </fieldset>
-            <fieldset class="Additional Information">
-                <legend>Additional Information</legend>
-                <div class="form-group">
-                    <label for="experience_points">Experience Points:</label>
-                    <input type="text" name="experience_points" required>
-                </div>
-                <div class="form-group">
-                    <label for="background">Background:</label>
-                    <input type="text" name="background" required>
-                </div>
-                <div class="form-group">
-                    <label for="personality">Personality:</label>
-                    <input type="text" name="personality" required>
-                </div>
-                <div class="form-group">
-                    <label for="ideal">Ideal:</label>
-                    <input type="text" name="ideal" required>
-                </div>
-                <div class="form-group">
-                    <label for="bonds">Bonds:</label>
-                    <input type="text" name="bonds" required>
-                </div>
-                <div class="form-group">
-                    <label for="flaws">Flaws:</label>
-                    <input type="text" name="flaws" required>
-                </div>
-            </fieldset>
-            <button type="submit" class="add-button">Add Character</button>
-            </form>
+<h1>Add Character</h1>
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+    
+    <fieldset>
+        <legend>Basic Information</legend>
+        <div class="form-group">
+            {{ form.name.label }} {{ form.name(class="form-control") }}
+            {% if form.name.errors %}
+                <div class="text-danger">{{ form.name.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.description.label }} {{ form.description(class="form-control") }}
+            {% if form.description.errors %}
+                <div class="text-danger">{{ form.description.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.race.label }} {{ form.race(class="form-control") }}
+            {% if form.race.errors %}
+                <div class="text-danger">{{ form.race.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.class_.label }} {{ form.class_(class="form-control") }}
+            {% if form.class_.errors %}
+                <div class="text-danger">{{ form.class_.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Attributes</legend>
+        <div class="form-group">
+            {{ form.age.label }} {{ form.age(class="form-control") }}
+            {% if form.age.errors %}
+                <div class="text-danger">{{ form.age.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.alignment.label }} {{ form.alignment(class="form-control") }}
+            {% if form.alignment.errors %}
+                <div class="text-danger">{{ form.alignment.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.strength.label }} {{ form.strength(class="form-control") }}
+            {% if form.strength.errors %}
+                <div class="text-danger">{{ form.strength.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.dexterity.label }} {{ form.dexterity(class="form-control") }}
+            {% if form.dexterity.errors %}
+                <div class="text-danger">{{ form.dexterity.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.constitution.label }} {{ form.constitution(class="form-control") }}
+            {% if form.constitution.errors %}
+                <div class="text-danger">{{ form.constitution.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.intelligence.label }} {{ form.intelligence(class="form-control") }}
+            {% if form.intelligence.errors %}
+                <div class="text-danger">{{ form.intelligence.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.wisdom.label }} {{ form.wisdom(class="form-control") }}
+            {% if form.wisdom.errors %}
+                <div class="text-danger">{{ form.wisdom.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.charisma.label }} {{ form.charisma(class="form-control") }}
+            {% if form.charisma.errors %}
+                <div class="text-danger">{{ form.charisma.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Background</legend>
+        <div class="form-group">
+            {{ form.background.label }} {{ form.background(class="form-control") }}
+            {% if form.background.errors %}
+                <div class="text-danger">{{ form.background.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.personality.label }} {{ form.personality(class="form-control") }}
+            {% if form.personality.errors %}
+                <div class="text-danger">{{ form.personality.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.ideal.label }} {{ form.ideal(class="form-control") }}
+            {% if form.ideal.errors %}
+                <div class="text-danger">{{ form.ideal.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.bonds.label }} {{ form.bonds(class="form-control") }}
+            {% if form.bonds.errors %}
+                <div class="text-danger">{{ form.bonds.errors[0] }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.flaws.label }} {{ form.flaws(class="form-control") }}
+            {% if form.flaws.errors %}
+                <div class="text-danger">{{ form.flaws.errors[0] }}</div>
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary add-button">Add Character</button>
+</form>
 {% endblock %}

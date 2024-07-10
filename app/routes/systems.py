@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from ..models.system import System
+from ..forms import SystemForm
 from ..extensions import db
 
 systems_bp = Blueprint('systems', __name__, url_prefix='/systems')
@@ -11,31 +12,32 @@ def list_systems():
 
 @systems_bp.route('/add', methods=['GET', 'POST'])
 def add_system():
-    if request.method == 'POST':
+    form = SystemForm()
+    if form.validate_on_submit():
         new_system = System(
-            name=request.form['name'],
-            description=request.form['description'],
-            rules=request.form.get('rules'),
-            basis=request.form.get('basis'),
-            world_id=request.form['world_id']
+            name=form.name.data,
+            description=form.description.data,
+            rules=form.rules.data,
+            basis=form.basis.data,
+            world_id=form.world_id.data
         )
         db.session.add(new_system)
         db.session.commit()
-        return redirect(url_for('systems.list_systems'))
-    return render_template('systems/add.html')
+        flash('System created successfully!', 'success')
+        return redirect(url_for('systems_bp.list_systems'))
+    return render_template('systems/add.html', form=form)
 
-@systems_bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@systems_bp.route('/edit/<int:id>', methods=['GET', 'POST'])
 def edit_system(id):
     system = System.query.get_or_404(id)
-    if request.method == 'POST':
-        system.name = request.form['name']
-        system.description = request.form['description']
-        system.rules = request.form.get('rules')
-        system.basis = request.form.get('basis')
-        system.world_id = request.form['world_id']
+    form = SystemForm(obj=system)
+    if form.validate_on_submit():
+        form.populate_obj(system)
         db.session.commit()
-        return redirect(url_for('systems.list_systems'))
-    return render_template('systems/edit.html', system=system)
+        flash('System updated successfully!', 'success')
+        return redirect(url_for('systems_bp.list_systems'))
+    return render_template('systems/edit.html', form=form)
+
 
 @systems_bp.route('/<int:id>/delete', methods=['POST'])
 def delete_system(id):
