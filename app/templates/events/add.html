@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Add Event</h1>
-    <form action="{{ url_for('events.add_event') }}" method="post" class="event-form">
+    <form action="{{ url_for('events.add_event') }}" method="post" class="event-form add-form">
         <fieldset class="basic-details">
             <legend>Basic Details</legend>
             <div class="form-group">
@@ -39,6 +39,6 @@
                 <input type="number" id="world_id" name="world_id" required>
             </div>
         </fieldset>
-        <button type="submit">Add</button>
+        <button type="submit" class="add-button">Add</button>
     </form>
 {% endblock %}

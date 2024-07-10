@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Add Location</h1>
 
-<form action="{{ url_for('locations.add_location') }}" method="post" class="location-form">
+<form action="{{ url_for('locations.add_location') }}" method="post" class="location-form add-form">
     <fieldset class="basic-information">
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -29,7 +29,7 @@
             <input type="text" id="terrain" name="terrain" required>
         </div>
     </fieldset>
-    <button type="submit">Add</button>
+    <button type="submit" class="add-button">Add</button>
 </form>
 
 {% endblock %}

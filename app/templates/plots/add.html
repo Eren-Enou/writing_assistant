@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Add Plot</h1>
 
-<form action="{{ url_for('plots.add_plot') }}" method="post" class="plot-form">
+<form action="{{ url_for('plots.add_plot') }}" method="post" class="plot-form add-form">
     <fieldset class="general-information">
         <legend>General Information</legend>
         <div class="form-group">
@@ -55,7 +55,7 @@
             <input type="datetime-local" id="published_date" name="published_date">
         </div>
     </fieldset>
-    <button type="submit">Add</button>
+    <button type="submit" class="add-button">Add</button>
 </form>
 
 {% endblock %}

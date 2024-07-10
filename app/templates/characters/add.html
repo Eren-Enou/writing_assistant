@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <h1>Add Character</h1>
-    <form action="{{ url_for('characters.add_character') }}" method="POST">
+    <form action="{{ url_for('characters.add_character') }}" method="POST" class="add-form">
         <fieldset class="personal-details">
             <legend>Personal Details</legend>
                 <div class="form-group">
@@ -87,6 +87,6 @@
                     <input type="text" name="flaws" required>
                 </div>
             </fieldset>
-            <button type="submit">Add Character</button>
+            <button type="submit" class="add-button">Add Character</button>
             </form>
 {% endblock %}

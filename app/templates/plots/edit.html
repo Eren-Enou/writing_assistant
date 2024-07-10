@@ -65,7 +65,7 @@
 {% block content %}
 <h1>Edit Plot</h1>
 
-<form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST">
+<form action="{{ url_for('plots.edit_plot', id=plot.id) }}" method="POST" class="plot-form edit-form">
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
@@ -122,7 +122,7 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Save">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 
 {% endblock %}

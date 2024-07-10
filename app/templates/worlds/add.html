@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Add World</h1>
 
-<form action="{{ url_for('worlds.add_world') }}" method="post" class="world-form">
+<form action="{{ url_for('worlds.add_world') }}" method="post" class="world-form add-form">
     <fieldset class="basic-information">
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -55,7 +55,7 @@
             <input type="text" id="magical_system" name="magical_system">
         </div>
     </fieldset>
-    <button type="submit">Add</button>
+    <button type="submit" class="add-button">Add</button>
 </form>
 
 {% endblock %}

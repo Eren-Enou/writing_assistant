@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit World</h1>
 
-<form action="{{ url_for('worlds.edit_world', id=world.id) }}" method="POST">
+<form action="{{ url_for('worlds.edit_world', id=world.id) }}" method="POST" class="world-form edit-form">
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -59,7 +59,7 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Save">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 
 {% endblock %}

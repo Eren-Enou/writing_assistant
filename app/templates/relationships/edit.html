@@ -2,27 +2,59 @@
 {% block content %}
 <h1>Edit Relationship</h1>
 
-<form action="{{ url_for('relationships.edit_relationship', id=relationship.id) }}" method="POST">
-    <label for="character1_id">Character 1:</label>
-    <input type="text" name="character1_id" value="{{ relationship.character1_id }}" required>
-    <label for="character2_id">Character 2:</label>
-    <input type="text" name="character2_id" value="{{ relationship.character2_id }}" required>
-    <label for="relationship_type">Relationship Type:</label>
-    <input type="text" name="relationship_type" value="{{ relationship.relationship_type }}" required>
-    <label for="description">Description:</label>
-    <textarea name="description">{{ relationship.description }}</textarea>
-    <label for="level">Level:</label>
-    <input type="text" name="level" value="{{ relationship.level }}">
-    <label for="is_romantic">Is Romantic:</label>
-    <input type="checkbox" name="is_romantic" {% if relationship.is_romantic %}checked{% endif %}>
-    <label for="is_supportive">Is Supportive:</label>
-    <input type="checkbox" name="is_supportive" {% if relationship.is_supportive %}checked{% endif %}>
-    <label for="is_rival">Is Rival:</label>
-    <input type="checkbox" name="is_rival" {% if relationship.is_rival %}checked{% endif %}>
-    <label for="is_ally">Is Ally:</label>
-    <input type="checkbox" name="is_ally" {% if relationship.is_ally %}checked{% endif %}>
-    <label for="is_conflict">Is Conflict:</label>
-    <input type="checkbox" name="is_conflict" {% if relationship.is_conflict %}checked{% endif %}>
-    <input type="submit" value="Save">
+<form action="{{ url_for('relationships.edit_relationship', id=relationship.id) }}" method="POST" class="relationship-form edit-form">
+    <fieldset>
+        <legend>Characters Involved</legend>
+        <div class="form-group">
+            <label for="character1_id">Character 1:</label>
+            <input type="text" name="character1_id" value="{{ relationship.character1_id }}" required>
+        </div>
+        <div class="form-group">
+            <label for="character2_id">Character 2:</label>
+            <input type="text" name="character2_id" value="{{ relationship.character2_id }}" required>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Relationship Details</legend>
+        <div class="form-group">
+            <label for="relationship_type">Relationship Type:</label>
+            <input type="text" name="relationship_type" value="{{ relationship.relationship_type }}" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea name="description">{{ relationship.description }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="level">Level:</label>
+            <input type="text" name="level" value="{{ relationship.level }}">
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Characteristics</legend>
+        <div class="form-group">
+            <label for="is_romantic">Is Romantic:</label>
+            <input type="checkbox" name="is_romantic" {% if relationship.is_romantic %}checked{% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="is_supportive">Is Supportive:</label>
+            <input type="checkbox" name="is_supportive" {% if relationship.is_supportive %}checked{% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="is_rival">Is Rival:</label>
+            <input type="checkbox" name="is_rival" {% if relationship.is_rival %}checked{% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="is_ally">Is Ally:</label>
+            <input type="checkbox" name="is_ally" {% if relationship.is_ally %}checked{% endif %}>
+        </div>
+        <div class="form-group">
+            <label for="is_conflict">Is Conflict:</label>
+            <input type="checkbox" name="is_conflict" {% if relationship.is_conflict %}checked{% endif %}>
+        </div>
+    </fieldset>
+
+    <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

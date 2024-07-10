@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit Creature</h1>
 
-<form action="{{ url_for('creatures.edit_creature', id=creature.id) }}" method="POST">
+<form action="{{ url_for('creatures.edit_creature', id=creature.id) }}" method="POST" class="creature-form edit-form">
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
@@ -56,6 +56,6 @@
             <input type="text" name="armor" value="{{ creature.armor }}" required>
         </div>
     </fieldset>
-    <input type="submit" value="Save Changes">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

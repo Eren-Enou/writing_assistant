@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit System</h1>
 
-<form action="{{ url_for('systems.edit_system', id=system.id) }}" method="POST">
+<form action="{{ url_for('systems.edit_system', id=system.id) }}" method="POST" class="system-form edit-form">
     <fieldset>
         <legend>General Information</legend>
         <div class="form-group">
@@ -31,7 +31,7 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Save">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 
 {% endblock %}

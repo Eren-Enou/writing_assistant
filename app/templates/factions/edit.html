@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit Faction</h1>
 
-<form action="{{ url_for('factions.edit_faction', id=faction.id) }}" method="POST">
+<form action="{{ url_for('factions.edit_faction', id=faction.id) }}" method="POST" class="faction-form edit-form">
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -47,6 +47,6 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Save Changes">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

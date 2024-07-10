@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit Chapter</h1>
 
-<form action="{{ url_for('chapters.edit_chapter', chapter_id=chapter.id) }}" method="POST">
+<form action="{{ url_for('chapters.edit_chapter', chapter_id=chapter.id) }}" method="POST" class="edit-form">
     <fieldset>
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -45,7 +45,7 @@
             <input type="text" name="faction_id" value="{{ chapter.faction_id }}">
         </div>
     </fieldset>
-    <input type="submit" value="Update Chapter">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 
 {% endblock %}

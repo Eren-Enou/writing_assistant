@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit Event</h1>
 
-<form action="{{ url_for('events.edit_event', id=event.id) }}" method="POST">
+<form action="{{ url_for('events.edit_event', id=event.id) }}" method="POST" class="event-form edit-form">
     <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
     <input type="hidden" name="id" value="{{ event.id }}">
 
@@ -46,6 +46,6 @@
         </div>
     </fieldset>
 
-    <input type="submit" value="Save Changes">
+    <button type="submit" class="edit-button">Update</button>
 </form>
 {% endblock %}

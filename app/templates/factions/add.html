@@ -2,7 +2,7 @@
 {% block content %}
 
 <h1>Add Faction</h1>
-<form action="{{ url_for('factions.add_faction') }}" method="post" class="faction-form">
+<form action="{{ url_for('factions.add_faction') }}" method="post" class="faction-form add-form">
     <fieldset class="basic-information">
         <legend>Basic Information</legend>
         <div class="form-group">
@@ -45,6 +45,6 @@
             <input type="text" id="alignment" name="alignment">
         </div>
     </fieldset>
-    <button type="submit">Add</button>
+    <button type="submit" class="add-button">Add</button>
 </form>
 {% endblock %}
