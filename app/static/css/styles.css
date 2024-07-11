@@ -201,3 +201,39 @@ legend {
 .delete-form input[type="submit"]:hover {
     background-color: #c9302c;
 }
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.25em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.select-multiple {
+    height: 200px;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.add-button, .edit-button {
+    display: block;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.add-button:hover, .edit-button:hover {
+    background-color: #0056b3;
+}

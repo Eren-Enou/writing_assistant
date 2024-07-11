@@ -2,7 +2,7 @@
 {% block content %}
 <h1>Edit Character</h1>
 
-<form method="POST">
+<form action="{{ url_for('characters.edit_character', id=character.id) }}" method="POST" class="edit-form">
     {{ form.hidden_tag() }}
     
     <fieldset>
