@@ -7,8 +7,12 @@ relationships_bp = Blueprint('relationships', __name__, url_prefix='/relationshi
 
 @relationships_bp.route('/')
 def list_relationships():
-    relationships = Relationship.query.all()
-    return render_template('relationships/list.html', relationships=relationships)
+    sort_by = request.args.get('sort_by', 'relationship_type')
+    if sort_by not in ['relationship_type', 'level', 'character1_id', 'character2_id']:
+        sort_by = 'relationship_type'
+    relationships = Relationship.query.order_by(sort_by).all()
+    return render_template('relationships/list.html', relationships=relationships, sort_by=sort_by)
+
 
 @relationships_bp.route('/add', methods=['GET', 'POST'])
 def add_relationship():

@@ -7,8 +7,15 @@ characters_bp = Blueprint('characters', __name__, url_prefix='/characters')
 
 @characters_bp.route('/')
 def list_characters():
-    characters = Character.query.all()
-    return render_template('characters/list.html', characters=characters)
+    sort_by = request.args.get('sort_by', 'name')
+    print(f"Sort by: {sort_by}")  # Debugging
+    if sort_by not in ['name', 'race', 'class_', 'age']:
+        sort_by = 'name'
+    characters = Character.query.order_by(sort_by).all()
+    print(f"Characters: {characters}")  # Debugging
+    return render_template('characters/list.html', characters=characters, sort_by=sort_by)
+
+
 
 @characters_bp.route('/add', methods=['GET', 'POST'])
 def add_character():

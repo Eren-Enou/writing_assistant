@@ -7,8 +7,12 @@ chapters_bp = Blueprint('chapters', __name__, url_prefix='/chapters')
 
 @chapters_bp.route('/')
 def list_chapters():
-    chapters = Chapter.query.all()
-    return render_template('chapters/list.html', chapters=chapters)
+    sort_by = request.args.get('sort_by', 'title')
+    if sort_by not in ['title', 'published_date', 'word_count', 'reading_time']:
+        sort_by = 'title'
+    chapters = Chapter.query.order_by(sort_by).all()
+    return render_template('chapters/list.html', chapters=chapters, sort_by=sort_by)
+
 
 @chapters_bp.route('/add', methods=['GET', 'POST'])
 def add_chapter():

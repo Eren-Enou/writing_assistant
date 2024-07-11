@@ -7,8 +7,12 @@ worlds_bp = Blueprint('worlds', __name__, url_prefix='/worlds')
 
 @worlds_bp.route('/')
 def list_worlds():
-    worlds = World.query.all()
-    return render_template('worlds/list.html', worlds=worlds)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'temperature']:
+        sort_by = 'name'
+    worlds = World.query.order_by(sort_by).all()
+    return render_template('worlds/list.html', worlds=worlds, sort_by=sort_by)
+
 
 @worlds_bp.route('/add', methods=['GET', 'POST'])
 def add_world():

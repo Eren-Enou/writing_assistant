@@ -7,8 +7,12 @@ factions_bp = Blueprint('factions', __name__, url_prefix='/factions')
 
 @factions_bp.route('/')
 def list_factions():
-    factions = Faction.query.all()
-    return render_template('factions/list.html', factions=factions)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'alignment', 'world_id']:
+        sort_by = 'name'
+    factions = Faction.query.order_by(sort_by).all()
+    return render_template('factions/list.html', factions=factions, sort_by=sort_by)
+
 
 @factions_bp.route('/add', methods=['GET', 'POST'])
 def add_faction():

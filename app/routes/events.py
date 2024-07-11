@@ -7,8 +7,12 @@ events_bp = Blueprint('events', __name__, url_prefix='/events')
 
 @events_bp.route('/')
 def list_events():
-    events = Event.query.all()
-    return render_template('events/list.html', events=events)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'date', 'location_id', 'faction_id']:
+        sort_by = 'name'
+    events = Event.query.order_by(sort_by).all()
+    return render_template('events/list.html', events=events, sort_by=sort_by)
+
 
 @events_bp.route('/add', methods=['GET', 'POST'])
 def add_event():

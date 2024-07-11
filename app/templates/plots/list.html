@@ -2,17 +2,22 @@
 {% block content %}
 <h1>Plots</h1>
 
+<div class="sort-options">
+    <span>Sort by:</span>
+    <a href="{{ url_for('plots.list_plots', sort_by='title') }}">Title</a> |
+    <a href="{{ url_for('plots.list_plots', sort_by='status') }}">Status</a> |
+    <a href="{{ url_for('plots.list_plots', sort_by='genre') }}">Genre</a> |
+    <a href="{{ url_for('plots.list_plots', sort_by='rating') }}">Rating</a>
+</div>
+
 <ul class="model-list">
     {% for plot in plots %}
-        <li class="model-item-container">
-            <div class="model-item">
-                <a href="{{ url_for('plots.edit_plot', id=plot.id) }}">{{ plot.title }}</a>
-            </div>
+        <li class="model-item">
+            <a href="{{ url_for('plots.edit_plot', id=plot.id) }}">{{ plot.title }}</a>
             <form action="{{ url_for('plots.delete_plot', id=plot.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>
         </li>
     {% endfor %}
 </ul>
-
 {% endblock %}

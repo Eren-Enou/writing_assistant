@@ -7,8 +7,12 @@ creatures_bp = Blueprint('creatures', __name__, url_prefix='/creatures')
 
 @creatures_bp.route('/')
 def list_creatures():
-    creatures = Creature.query.all()
-    return render_template('creatures/list.html', creatures=creatures)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'species', 'size', 'age']:
+        sort_by = 'name'
+    creatures = Creature.query.order_by(sort_by).all()
+    return render_template('creatures/list.html', creatures=creatures, sort_by=sort_by)
+
 
 @creatures_bp.route('/add', methods=['GET', 'POST'])
 def add_creature():

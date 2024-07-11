@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-
 <h1>Chapters</h1>
+
+<div class="sort-options">
+    <span>Sort by:</span>
+    <a href="{{ url_for('chapters.list_chapters', sort_by='title') }}">Title</a> |
+    <a href="{{ url_for('chapters.list_chapters', sort_by='published_date') }}">Published Date</a> |
+    <a href="{{ url_for('chapters.list_chapters', sort_by='word_count') }}">Word Count</a> |
+    <a href="{{ url_for('chapters.list_chapters', sort_by='reading_time') }}">Reading Time</a>
+</div>
+
 <ul class="model-list">
     {% for chapter in chapters %}
-        <li class="model-item-container">
-            <div class="model-item">
-                <a href="{{ url_for('chapters.edit_chapter', id=chapter.id) }}">{{ chapter.title }}</a></li>
-            </div>
-        <form action="{{ url_for('chapters.delete_chapter', id=chapter.id) }}" method="POST" class="delete-form">
-            <input type="submit" value="Delete">
-        </form>
+        <li class="model-item">
+            <a href="{{ url_for('chapters.edit_chapter', id=chapter.id) }}">{{ chapter.title }}</a>
+            <form action="{{ url_for('chapters.delete_chapter', id=chapter.id) }}" method="POST" class="delete-form">
+                <input type="submit" value="Delete">
+            </form>
+        </li>
     {% endfor %}
-    
 </ul>
-
 {% endblock %}

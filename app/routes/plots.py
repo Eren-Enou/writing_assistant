@@ -7,8 +7,12 @@ plots_bp = Blueprint('plots', __name__, url_prefix='/plots')
 
 @plots_bp.route('/')
 def list_plots():
-    plots = Plot.query.all()
-    return render_template('plots/list.html', plots=plots)
+    sort_by = request.args.get('sort_by', 'title')
+    if sort_by not in ['title', 'status', 'genre', 'rating']:
+        sort_by = 'title'
+    plots = Plot.query.order_by(sort_by).all()
+    return render_template('plots/list.html', plots=plots, sort_by=sort_by)
+
 
 @plots_bp.route('/add', methods=['GET', 'POST'])
 def add_plot():

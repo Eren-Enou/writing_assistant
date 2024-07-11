@@ -7,8 +7,12 @@ systems_bp = Blueprint('systems', __name__, url_prefix='/systems')
 
 @systems_bp.route('/')
 def list_systems():
-    systems = System.query.all()
-    return render_template('systems/list.html', systems=systems)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'world_id']:
+        sort_by = 'name'
+    systems = System.query.order_by(sort_by).all()
+    return render_template('systems/list.html', systems=systems, sort_by=sort_by)
+
 
 @systems_bp.route('/add', methods=['GET', 'POST'])
 def add_system():

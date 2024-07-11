@@ -7,8 +7,12 @@ items_bp = Blueprint('items', __name__, url_prefix='/items')
 
 @items_bp.route('/')
 def list_items():
-    items = Item.query.all()
-    return render_template('items/list.html', items=items)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'type', 'value']:
+        sort_by = 'name'
+    items = Item.query.order_by(sort_by).all()
+    return render_template('items/list.html', items=items, sort_by=sort_by)
+
 
 @items_bp.route('/add', methods=['GET', 'POST'])
 def add_item():

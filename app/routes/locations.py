@@ -7,8 +7,12 @@ locations_bp = Blueprint('locations', __name__, url_prefix='/locations')
 
 @locations_bp.route('/')
 def list_locations():
-    locations = Location.query.all()
-    return render_template('locations/list.html', locations=locations)
+    sort_by = request.args.get('sort_by', 'name')
+    if sort_by not in ['name', 'climate', 'terrain']:
+        sort_by = 'name'
+    locations = Location.query.order_by(sort_by).all()
+    return render_template('locations/list.html', locations=locations, sort_by=sort_by)
+
 
 @locations_bp.route('/add', methods=['GET', 'POST'])
 def add_location():

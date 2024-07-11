@@ -1,17 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Systems</h1>
+
+<div class="sort-options">
+    <span>Sort by:</span>
+    <a href="{{ url_for('systems.list_systems', sort_by='name') }}">Name</a> |
+    <a href="{{ url_for('systems.list_systems', sort_by='world_id') }}">World</a>
+</div>
+
 <ul class="model-list">
     {% for system in systems %}
-        <li class="model-item-container">
-            <div class="model-item">
-                <a href="{{ url_for('systems.edit_system', id=system.id) }}">{{ system.name }}</a>
-            </div>
+        <li class="model-item">
+            <a href="{{ url_for('systems.edit_system', id=system.id) }}">
+                {{ system.name }} - {{ system.world.name }}
+            </a>
             <form action="{{ url_for('systems.delete_system', id=system.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>
         </li>
     {% endfor %}
 </ul>
-
 {% endblock %}
