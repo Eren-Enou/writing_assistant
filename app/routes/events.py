@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.event import Event
 from ..forms import EventForm
 from ..extensions import db
@@ -8,10 +9,18 @@ events_bp = Blueprint('events', __name__, url_prefix='/events')
 @events_bp.route('/')
 def list_events():
     sort_by = request.args.get('sort_by', 'name')
-    if sort_by not in ['name', 'date', 'location_id', 'faction_id']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['name', 'date']:
         sort_by = 'name'
-    events = Event.query.order_by(sort_by).all()
+
+    query = Event.query
+    if search:
+        query = query.filter(Event.name.ilike(f'%{search}%') | Event.description.ilike(f'%{search}%'))
+
+    events = query.order_by(text(sort_by)).all()
     return render_template('events/list.html', events=events, sort_by=sort_by)
+
 
 
 @events_bp.route('/add', methods=['GET', 'POST'])

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.faction import Faction
 from ..forms import FactionForm
 from ..extensions import db
@@ -8,10 +9,18 @@ factions_bp = Blueprint('factions', __name__, url_prefix='/factions')
 @factions_bp.route('/')
 def list_factions():
     sort_by = request.args.get('sort_by', 'name')
-    if sort_by not in ['name', 'alignment', 'world_id']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['name']:
         sort_by = 'name'
-    factions = Faction.query.order_by(sort_by).all()
+
+    query = Faction.query
+    if search:
+        query = query.filter(Faction.name.ilike(f'%{search}%') | Faction.description.ilike(f'%{search}%'))
+
+    factions = query.order_by(text(sort_by)).all()
     return render_template('factions/list.html', factions=factions, sort_by=sort_by)
+
 
 
 @factions_bp.route('/add', methods=['GET', 'POST'])

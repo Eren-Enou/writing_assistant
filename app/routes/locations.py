@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.location import Location
 from ..forms import LocationForm
 from ..extensions import db
@@ -8,10 +9,23 @@ locations_bp = Blueprint('locations', __name__, url_prefix='/locations')
 @locations_bp.route('/')
 def list_locations():
     sort_by = request.args.get('sort_by', 'name')
+    search = request.args.get('search', '')
+
     if sort_by not in ['name', 'climate', 'terrain']:
         sort_by = 'name'
-    locations = Location.query.order_by(sort_by).all()
+
+    query = Location.query
+    if search:
+        query = query.filter(
+            Location.name.ilike(f'%{search}%') |
+            Location.description.ilike(f'%{search}%') |
+            Location.climate.ilike(f'%{search}%') |
+            Location.terrain.ilike(f'%{search}%')
+        )
+
+    locations = query.order_by(text(sort_by)).all()
     return render_template('locations/list.html', locations=locations, sort_by=sort_by)
+
 
 
 @locations_bp.route('/add', methods=['GET', 'POST'])

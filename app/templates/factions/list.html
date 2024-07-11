@@ -4,15 +4,20 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('factions.list_factions', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('factions.list_factions', sort_by='alignment') }}">Alignment</a> |
-    <a href="{{ url_for('factions.list_factions', sort_by='world_id') }}">World</a>
+    <a href="{{ url_for('factions.list_factions', sort_by='name') }}">Name</a>
 </div>
+
+<form method="GET" action="{{ url_for('factions.list_factions') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search factions..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for faction in factions %}
         <li class="model-item">
-            <a href="{{ url_for('factions.edit_faction', id=faction.id) }}">{{ faction.name }}</a>
+            <a href="{{ url_for('factions.edit_faction', id=faction.id) }}">
+                {{ faction.name }}
+            </a>
             <form action="{{ url_for('factions.delete_faction', id=faction.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

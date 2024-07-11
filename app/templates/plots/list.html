@@ -4,16 +4,22 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('plots.list_plots', sort_by='title') }}">Title</a> |
-    <a href="{{ url_for('plots.list_plots', sort_by='status') }}">Status</a> |
-    <a href="{{ url_for('plots.list_plots', sort_by='genre') }}">Genre</a> |
-    <a href="{{ url_for('plots.list_plots', sort_by='rating') }}">Rating</a>
+    <a href="{{ url_for('plots.list_plots', sort_by='title') }}">Title</a>
+    <a href="{{ url_for('plots.list_plots', sort_by='status') }}">Status</a>
+    <a href="{{ url_for('plots.list_plots', sort_by='genre') }}">Genre</a>
 </div>
+
+<form method="GET" action="{{ url_for('plots.list_plots') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search plots..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for plot in plots %}
         <li class="model-item">
-            <a href="{{ url_for('plots.edit_plot', id=plot.id) }}">{{ plot.title }}</a>
+            <a href="{{ url_for('plots.edit_plot', id=plot.id) }}">
+                {{ plot.title }}
+            </a>
             <form action="{{ url_for('plots.delete_plot', id=plot.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

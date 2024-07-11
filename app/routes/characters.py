@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..forms import CharacterForm
 from ..models import Character
 from ..extensions import db
@@ -8,12 +9,18 @@ characters_bp = Blueprint('characters', __name__, url_prefix='/characters')
 @characters_bp.route('/')
 def list_characters():
     sort_by = request.args.get('sort_by', 'name')
-    print(f"Sort by: {sort_by}")  # Debugging
-    if sort_by not in ['name', 'race', 'class_', 'age']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['name', 'race']:
         sort_by = 'name'
-    characters = Character.query.order_by(sort_by).all()
-    print(f"Characters: {characters}")  # Debugging
+
+    query = Character.query
+    if search:
+        query = query.filter(Character.name.ilike(f'%{search}%') | Character.race.ilike(f'%{search}%'))
+
+    characters = query.order_by(text(sort_by)).all()
     return render_template('characters/list.html', characters=characters, sort_by=sort_by)
+
 
 
 

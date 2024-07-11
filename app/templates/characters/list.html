@@ -5,15 +5,20 @@
 <div class="sort-options">
     <span>Sort by:</span>
     <a href="{{ url_for('characters.list_characters', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('characters.list_characters', sort_by='race') }}">Race</a> |
-    <a href="{{ url_for('characters.list_characters', sort_by='class_') }}">Class</a> |
-    <a href="{{ url_for('characters.list_characters', sort_by='age') }}">Age</a>
+    <a href="{{ url_for('characters.list_characters', sort_by='race') }}">Race</a>
 </div>
+
+<form method="GET" action="{{ url_for('characters.list_characters') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search characters..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for character in characters %}
         <li class="model-item">
-            <a href="{{ url_for('characters.edit_character', id=character.id) }}">{{ character.name }}</a>
+            <a href="{{ url_for('characters.edit_character', id=character.id) }}">
+                {{ character.name }} - Race: {{ character.race }}
+            </a>
             <form action="{{ url_for('characters.delete_character', id=character.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

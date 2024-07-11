@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.system import System
 from ..forms import SystemForm
 from ..extensions import db
@@ -8,10 +9,23 @@ systems_bp = Blueprint('systems', __name__, url_prefix='/systems')
 @systems_bp.route('/')
 def list_systems():
     sort_by = request.args.get('sort_by', 'name')
+    search = request.args.get('search', '')
+
     if sort_by not in ['name', 'world_id']:
         sort_by = 'name'
-    systems = System.query.order_by(sort_by).all()
+
+    query = System.query
+    if search:
+        query = query.join(World, System.world_id == World.id).filter(
+            System.name.ilike(f'%{search}%') |
+            System.description.ilike(f'%{search}%') |
+            System.rules.ilike(f'%{search}%') |
+            World.name.ilike(f'%{search}%')
+        )
+
+    systems = query.order_by(text(sort_by)).all()
     return render_template('systems/list.html', systems=systems, sort_by=sort_by)
+
 
 
 @systems_bp.route('/add', methods=['GET', 'POST'])

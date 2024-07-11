@@ -5,15 +5,20 @@
 <div class="sort-options">
     <span>Sort by:</span>
     <a href="{{ url_for('events.list_events', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('events.list_events', sort_by='date') }}">Date</a> |
-    <a href="{{ url_for('events.list_events', sort_by='location_id') }}">Location</a> |
-    <a href="{{ url_for('events.list_events', sort_by='faction_id') }}">Faction</a>
+    <a href="{{ url_for('events.list_events', sort_by='date') }}">Date</a>
 </div>
+
+<form method="GET" action="{{ url_for('events.list_events') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search events..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for event in events %}
         <li class="model-item">
-            <a href="{{ url_for('events.edit_event', id=event.id) }}">{{ event.name }}</a>
+            <a href="{{ url_for('events.edit_event', id=event.id) }}">
+                {{ event.name }} - Date: {{ event.date.strftime('%Y-%m-%d') }}
+            </a>
             <form action="{{ url_for('events.delete_event', id=event.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.world import World
 from ..forms import WorldForm
 from ..extensions import db
@@ -8,10 +9,18 @@ worlds_bp = Blueprint('worlds', __name__, url_prefix='/worlds')
 @worlds_bp.route('/')
 def list_worlds():
     sort_by = request.args.get('sort_by', 'name')
+    search = request.args.get('search', '')
+
     if sort_by not in ['name', 'temperature']:
         sort_by = 'name'
-    worlds = World.query.order_by(sort_by).all()
+
+    query = World.query
+    if search:
+        query = query.filter(World.name.ilike(f'%{search}%'))
+
+    worlds = query.order_by(text(sort_by)).all()
     return render_template('worlds/list.html', worlds=worlds, sort_by=sort_by)
+
 
 
 @worlds_bp.route('/add', methods=['GET', 'POST'])

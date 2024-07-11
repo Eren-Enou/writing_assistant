@@ -4,15 +4,22 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('locations.list_locations', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('locations.list_locations', sort_by='climate') }}">Climate</a> |
+    <a href="{{ url_for('locations.list_locations', sort_by='name') }}">Name</a>
+    <a href="{{ url_for('locations.list_locations', sort_by='climate') }}">Climate</a>
     <a href="{{ url_for('locations.list_locations', sort_by='terrain') }}">Terrain</a>
 </div>
+
+<form method="GET" action="{{ url_for('locations.list_locations') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search locations..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for location in locations %}
         <li class="model-item">
-            <a href="{{ url_for('locations.edit_location', id=location.id) }}">{{ location.name }}</a>
+            <a href="{{ url_for('locations.edit_location', id=location.id) }}">
+                {{ location.name }}
+            </a>
             <form action="{{ url_for('locations.delete_location', id=location.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.plot import Plot
 from ..forms import PlotForm
 from ..extensions import db
@@ -8,10 +9,24 @@ plots_bp = Blueprint('plots', __name__, url_prefix='/plots')
 @plots_bp.route('/')
 def list_plots():
     sort_by = request.args.get('sort_by', 'title')
-    if sort_by not in ['title', 'status', 'genre', 'rating']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['title', 'status', 'genre']:
         sort_by = 'title'
-    plots = Plot.query.order_by(sort_by).all()
+
+    query = Plot.query
+    if search:
+        query = query.filter(
+            Plot.title.ilike(f'%{search}%') |
+            Plot.summary.ilike(f'%{search}%') |
+            Plot.description.ilike(f'%{search}%') |
+            Plot.status.ilike(f'%{search}%') |
+            Plot.genre.ilike(f'%{search}%')
+        )
+
+    plots = query.order_by(text(sort_by)).all()
     return render_template('plots/list.html', plots=plots, sort_by=sort_by)
+
 
 
 @plots_bp.route('/add', methods=['GET', 'POST'])

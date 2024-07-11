@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.item import Item
 from ..forms import ItemForm
 from ..extensions import db
@@ -8,10 +9,22 @@ items_bp = Blueprint('items', __name__, url_prefix='/items')
 @items_bp.route('/')
 def list_items():
     sort_by = request.args.get('sort_by', 'name')
+    search = request.args.get('search', '')
+
     if sort_by not in ['name', 'type', 'value']:
         sort_by = 'name'
-    items = Item.query.order_by(sort_by).all()
+
+    query = Item.query
+    if search:
+        query = query.filter(
+            Item.name.ilike(f'%{search}%') |
+            Item.description.ilike(f'%{search}%') |
+            Item.type.ilike(f'%{search}%')
+        )
+
+    items = query.order_by(text(sort_by)).all()
     return render_template('items/list.html', items=items, sort_by=sort_by)
+
 
 
 @items_bp.route('/add', methods=['GET', 'POST'])

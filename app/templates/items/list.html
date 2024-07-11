@@ -4,15 +4,22 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('items.list_items', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('items.list_items', sort_by='type') }}">Type</a> |
+    <a href="{{ url_for('items.list_items', sort_by='name') }}">Name</a>
+    <a href="{{ url_for('items.list_items', sort_by='type') }}">Type</a>
     <a href="{{ url_for('items.list_items', sort_by='value') }}">Value</a>
 </div>
+
+<form method="GET" action="{{ url_for('items.list_items') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search items..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for item in items %}
         <li class="model-item">
-            <a href="{{ url_for('items.edit_item', id=item.id) }}">{{ item.name }}</a>
+            <a href="{{ url_for('items.edit_item', id=item.id) }}">
+                {{ item.name }}
+            </a>
             <form action="{{ url_for('items.delete_item', id=item.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

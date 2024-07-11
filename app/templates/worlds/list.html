@@ -8,6 +8,11 @@
     <a href="{{ url_for('worlds.list_worlds', sort_by='temperature') }}">Temperature</a>
 </div>
 
+<form method="GET" action="{{ url_for('worlds.list_worlds') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search worlds..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
+
 <ul class="model-list">
     {% for world in worlds %}
         <li class="model-item">

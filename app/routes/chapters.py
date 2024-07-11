@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.chapter import Chapter
 from ..forms.chapter import ChapterForm
 from ..extensions import db
@@ -8,10 +9,18 @@ chapters_bp = Blueprint('chapters', __name__, url_prefix='/chapters')
 @chapters_bp.route('/')
 def list_chapters():
     sort_by = request.args.get('sort_by', 'title')
-    if sort_by not in ['title', 'published_date', 'word_count', 'reading_time']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['title', 'content']:
         sort_by = 'title'
-    chapters = Chapter.query.order_by(sort_by).all()
+
+    query = Chapter.query
+    if search:
+        query = query.filter(Chapter.title.ilike(f'%{search}%') | Chapter.content.ilike(f'%{search}%'))
+
+    chapters = query.order_by(text(sort_by)).all()
     return render_template('chapters/list.html', chapters=chapters, sort_by=sort_by)
+
 
 
 @chapters_bp.route('/add', methods=['GET', 'POST'])

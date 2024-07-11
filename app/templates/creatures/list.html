@@ -5,15 +5,20 @@
 <div class="sort-options">
     <span>Sort by:</span>
     <a href="{{ url_for('creatures.list_creatures', sort_by='name') }}">Name</a> |
-    <a href="{{ url_for('creatures.list_creatures', sort_by='species') }}">Species</a> |
-    <a href="{{ url_for('creatures.list_creatures', sort_by='size') }}">Size</a> |
-    <a href="{{ url_for('creatures.list_creatures', sort_by='age') }}">Age</a>
+    <a href="{{ url_for('creatures.list_creatures', sort_by='species') }}">Species</a>
 </div>
+
+<form method="GET" action="{{ url_for('creatures.list_creatures') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search creatures..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for creature in creatures %}
         <li class="model-item">
-            <a href="{{ url_for('creatures.edit_creature', id=creature.id) }}">{{ creature.name }}</a>
+            <a href="{{ url_for('creatures.edit_creature', id=creature.id) }}">
+                {{ creature.name }} - Species: {{ creature.species }}
+            </a>
             <form action="{{ url_for('creatures.delete_creature', id=creature.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">
             </form>

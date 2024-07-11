@@ -4,15 +4,20 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('systems.list_systems', sort_by='name') }}">Name</a> |
+    <a href="{{ url_for('systems.list_systems', sort_by='name') }}">Name</a>
     <a href="{{ url_for('systems.list_systems', sort_by='world_id') }}">World</a>
 </div>
+
+<form method="GET" action="{{ url_for('systems.list_systems') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search systems..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for system in systems %}
         <li class="model-item">
             <a href="{{ url_for('systems.edit_system', id=system.id) }}">
-                {{ system.name }} - {{ system.world.name }}
+                {{ system.name }}
             </a>
             <form action="{{ url_for('systems.delete_system', id=system.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">

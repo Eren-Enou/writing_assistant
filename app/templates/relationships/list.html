@@ -4,17 +4,20 @@
 
 <div class="sort-options">
     <span>Sort by:</span>
-    <a href="{{ url_for('relationships.list_relationships', sort_by='relationship_type') }}">Relationship Type</a> |
-    <a href="{{ url_for('relationships.list_relationships', sort_by='level') }}">Level</a> |
-    <a href="{{ url_for('relationships.list_relationships', sort_by='character1_id') }}">Character 1</a> |
-    <a href="{{ url_for('relationships.list_relationships', sort_by='character2_id') }}">Character 2</a>
+    <a href="{{ url_for('relationships.list_relationships', sort_by='relationship_type') }}">Relationship Type</a>
+    <a href="{{ url_for('relationships.list_relationships', sort_by='level') }}">Level</a>
 </div>
+
+<form method="GET" action="{{ url_for('relationships.list_relationships') }}" class="search-form">
+    <input type="text" name="search" placeholder="Search relationships..." value="{{ request.args.get('search', '') }}">
+    <button type="submit">Search</button>
+</form>
 
 <ul class="model-list">
     {% for relationship in relationships %}
         <li class="model-item">
             <a href="{{ url_for('relationships.edit_relationship', id=relationship.id) }}">
-                {{ relationship.relationship_type }} - {{ relationship.character1.name }} & {{ relationship.character2.name }}
+                {{ relationship.character1.name }} - {{ relationship.character2.name }}: {{ relationship.relationship_type }}
             </a>
             <form action="{{ url_for('relationships.delete_relationship', id=relationship.id) }}" method="POST" class="delete-form">
                 <input type="submit" value="Delete">

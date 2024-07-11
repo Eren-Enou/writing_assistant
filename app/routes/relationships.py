@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from sqlalchemy import text
 from ..models.relationship import Relationship
 from ..forms import RelationshipForm
 from ..extensions import db
@@ -8,10 +9,22 @@ relationships_bp = Blueprint('relationships', __name__, url_prefix='/relationshi
 @relationships_bp.route('/')
 def list_relationships():
     sort_by = request.args.get('sort_by', 'relationship_type')
-    if sort_by not in ['relationship_type', 'level', 'character1_id', 'character2_id']:
+    search = request.args.get('search', '')
+
+    if sort_by not in ['relationship_type', 'level']:
         sort_by = 'relationship_type'
-    relationships = Relationship.query.order_by(sort_by).all()
+
+    query = Relationship.query
+    if search:
+        query = query.join(Character, Relationship.character1_id == Character.id).join(Character, Relationship.character2_id == Character.id).filter(
+            Character.name.ilike(f'%{search}%') |
+            Relationship.relationship_type.ilike(f'%{search}%') |
+            Relationship.description.ilike(f'%{search}%')
+        )
+
+    relationships = query.order_by(text(sort_by)).all()
     return render_template('relationships/list.html', relationships=relationships, sort_by=sort_by)
+
 
 
 @relationships_bp.route('/add', methods=['GET', 'POST'])
