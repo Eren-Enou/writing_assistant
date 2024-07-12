@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask_login import login_required
 
 main_bp = Blueprint('main', __name__)
 
@@ -13,3 +14,8 @@ def create():
 @main_bp.route('/list')
 def list_models():
     return render_template('list.html')
+
+@main_bp.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('user/dashboard.html')

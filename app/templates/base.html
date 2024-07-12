@@ -10,8 +10,15 @@
     <header>
         <h2>Fantasy Novel Assistant</h2>
         <nav>
-            <p>Click <a href="{{ url_for('main.create') }}">here</a> to start creating your models.</p>
-            <p>Click <a href="{{ url_for('main.list_models') }}">here</a> to view your models.</p>
+            {% if current_user.is_authenticated %}
+                <p>Welcome, {{ current_user.username }}!</p>
+                <p>Click <a href="{{ url_for('main.create') }}">here</a> to start creating your models.</p>
+                <p>Click <a href="{{ url_for('main.list_models') }}">here</a> to view your models.</p>
+                <p>Click <a href="{{ url_for('auth.logout') }}">here</a> to log out.</p>
+            {% else %}
+                <p>Click <a href="{{ url_for('auth.login') }}">here</a> to log in.</p>
+                <p>Click <a href="{{ url_for('auth.register') }}">here</a> to register.</p>
+            {% endif %}
         </nav>
     </header>
     <main>

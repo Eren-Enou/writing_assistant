@@ -9,3 +9,4 @@ from .system import System
 from .faction import Faction
 from .event import Event
 from .relationship import Relationship
+from .user import User
